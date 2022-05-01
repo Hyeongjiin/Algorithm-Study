@@ -1,0 +1,25 @@
+n, m, k = map(int, input().split())
+data = list(map(int, input().split()))
+
+max_first = 0
+max_second = 0
+
+for i in data:
+  if max_first < i:
+    max_second = max_first
+    max_first = i
+  elif max_second < i:
+    max_second = i
+
+count_first = 0
+result = 0
+
+for i in range (m):
+  if count_first < k:
+    result += max_first
+    count_first += 1
+  else:
+    result += max_second
+    count_first = 0
+
+print(result)
