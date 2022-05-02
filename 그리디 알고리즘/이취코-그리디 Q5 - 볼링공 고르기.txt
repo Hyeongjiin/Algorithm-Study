@@ -1,0 +1,29 @@
+n, m = map(int, input().split())
+data = list(map(int, input().split()))
+
+count = 0
+
+for i in range(n - 1):
+  for j in range(i + 1, n):
+    if (data[i] != data[j]):
+      count += 1
+
+print(count)
+
+###########################################
+
+n, m = map(int, input().split())
+data = list(map(int, input().split()))
+
+weight = [0] * 11
+
+for i in data:
+  weight[i] += 1
+
+result = 0
+
+for i in range(1, m+1):
+  n -= weight[i]
+  result += weight[i] * n 
+
+print(result)
