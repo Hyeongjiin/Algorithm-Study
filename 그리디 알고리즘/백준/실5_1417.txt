@@ -1,0 +1,45 @@
+n = int(input())
+candi = []
+count = 0
+
+for i in range(n):
+    if i == 0:
+        dasom = (int(input()))
+    else:
+        candi.append(int(input()))
+
+candi.sort(reverse = True)
+
+if (len(candi) == 0):
+    print(0)
+else:
+    while (candi[0] >= dasom):
+        candi[0] -= 1
+        dasom += 1
+        count += 1
+        candi.sort(reverse = True)
+    
+    print(count)
+
+#####################################################
+
+n = int(input())
+candi = []
+count = 0
+
+for i in range(n):
+    if i == 0:
+        dasom = (int(input()))
+    else:
+        candi.append(int(input()))
+
+if len(candi) == 0:
+    print(0)
+else:
+    while max(candi) >= dasom:
+        data = candi.index(max(candi))
+        dasom += 1
+        count += 1
+        candi[data] -= 1
+    
+    print(count)

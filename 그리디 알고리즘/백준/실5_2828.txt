@@ -1,0 +1,18 @@
+screen, basket = map(int, input().split())
+j = int(input())
+position = 1
+count = 0
+
+for i in range(j):
+    apple = int(input())
+    while True:
+        if (position <= apple <= position + basket - 1):
+            break
+        if apple > position + basket - 1:
+            position += 1
+            count += 1
+        else:
+            position -= 1
+            count += 1
+          
+print(count)

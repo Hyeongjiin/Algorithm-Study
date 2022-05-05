@@ -1,0 +1,9 @@
+n = int(input())
+seat = input()
+seat = seat.replace('S', 'K').replace('LL', 'K')
+cup = len(seat) + 1
+
+if cup >= n:
+    print(n)
+else:
+    print(cup)
