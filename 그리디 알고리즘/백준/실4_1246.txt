@@ -1,0 +1,18 @@
+N, M = map(int, input().split())
+price = []
+for i in range(M):
+    price.append(int(input()))
+price.sort()
+maxP = 0
+value = -1
+total = 0
+for i in range(M):
+    if (M - i >= N):
+        total = price[i] * N
+    else:
+        total = price[i] * (M - i)
+    if (maxP < total):
+        value = price[i]
+        maxP = total
+
+print(value, maxP)

@@ -1,0 +1,14 @@
+N, M = map(int, input().split())
+min_set = 1001
+min_one = 1001
+set = 0
+one = 0
+total = 0
+
+for i in range(M):
+    set, one = map(int, input().split())
+    min_set = min(min_set, set)
+    min_one = min(min_one, one)
+
+total = min(min_one * N, (N // 6 + 1) * min_set, (N // 6) * min_set + (N % 6) * min_one)
+print(total)

@@ -1,0 +1,14 @@
+import sys
+
+docu = sys.stdin.readline().rstrip()
+time = docu.count(input())
+print(time)
+
+#############################################
+
+n = input()
+print(n.count(input()))
+
+#############################################
+
+print(input().count(input()))

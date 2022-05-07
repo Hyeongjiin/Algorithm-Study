@@ -1,0 +1,11 @@
+N = int(input())
+data = []
+for i in range(N):
+    data.append(int(input()))
+data.sort(reverse = True)
+total = 0
+for i in range(len(data)):
+    if data[i] - i < 0:
+        continue
+    total += data[i] - i
+print(total)
