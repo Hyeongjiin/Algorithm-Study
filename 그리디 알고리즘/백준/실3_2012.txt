@@ -1,0 +1,13 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+data = [int(input()) for _ in range(N)]
+data.sort()
+total = 0
+
+for i in range(N):
+    if (i + 1 - data[i] >= 0):
+        total += i + 1 - data[i]
+    else:
+        total += data[i] - i - 1
+print(total)

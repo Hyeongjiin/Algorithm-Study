@@ -1,0 +1,41 @@
+data = input()
+data_pel = []
+data_set = []
+count = []
+odd = 0
+even = 0
+total = 0
+index = 0
+index_odd = 0
+
+for i in range(len(data)):
+    data_pel.append(data[i])
+
+total = len(data_pel)
+
+data_set = set(data_pel)
+data_set = list(data_set)
+data_set.sort()
+for i in range(len(data_set)):
+    count.append(data_pel.count(data_set[i]))
+
+for i in range(len(count)):
+    if count[i] % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+        index_odd = i
+
+if odd > 1:
+    print("I'm Sorry Hansoo")
+else:
+    for i in range(len(count)):
+        while count[i] > 1:
+            data_pel[index] = data_set[i]
+            data_pel[total - 1 - index] = data_set[i]
+            count[i] -= 2
+            index += 1
+    if odd == 1:
+        data_pel[index] = data_set[index_odd]
+    result = ''.join(s for s in data_pel)
+    print(result)
