@@ -1,0 +1,23 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+data = list(map(int, input().split()))
+data.sort()
+length = len(data)
+differ = 0
+
+if (N % 2 != 0):
+    differ = data[length // 2 + N // 2] - data[length // 2 - N // 2]
+else:
+    differ = data[length // 2 + N // 2 - 1] - data[(length // 2 - 1) - (N // 2 - 1)]
+print(differ)
+
+#########################################################################
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+data = list(map(int, input().split()))
+data.sort()
+
+print(data[2 * N - 1] - data[N])
