@@ -50,3 +50,27 @@ c. 개구리
 시다. 만약 다음 문자가 P라면 어떻게 될까요? k는 1 감소하고 p는 1 증가하겠죠. K가 나오
 면 k는 1증가하고 p는 1 감소합니다. 만약 이렇게 바뀐 p, k값에 음수가 있다면 이는 추가적
 인 개구리가 필요한 상황이란 겁니다. 따라서 정답을 증가시켜줍니다.
+
+############################################
+발전된 코드 
+
+cry = input()
+last_K = 0
+last_P = 0
+length = len(cry)
+
+for i in range(length):
+    if cry[i] == 'K':
+        if last_P > 0:
+            last_K += 1
+            last_P -= 1
+        else:
+            last_K += 1
+    elif cry[i] == 'P':
+        if last_K > 0:
+            last_P += 1
+            last_K -= 1
+        else:
+            last_P += 1
+
+print(last_K + last_P)
