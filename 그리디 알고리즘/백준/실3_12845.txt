@@ -1,0 +1,11 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+data = list(map(int, input().split()))
+length = len(data)
+max = max(data)
+total = 0
+for i in range(length):
+    total += data[i] + max
+total -= 2 * max
+print(total)
