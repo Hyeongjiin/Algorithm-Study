@@ -1,0 +1,52 @@
+cry = input()
+last_K = 0
+last_P = 0
+length = len(cry)
+remember = 'A'
+
+if cry[0] == 'K':
+    remember = 'K'
+    last_K += 1
+elif cry[0] == 'P':
+    remember = 'P'
+    last_P += 1
+  
+for i in range(1, length):
+    if remember != cry[i]:
+        if cry[i] == 'K':
+            last_K += 1
+            last_P -= 1
+            remember = 'K'
+        elif cry[i] == 'P':
+            last_K -= 1
+            last_P += 1
+            remember = 'P'
+    else:
+        if cry[i] == 'K':
+            last_K += 1
+            if last_P >= 1:
+                last_P -= 1
+            remember = 'K'
+        else:
+            last_P += 1
+            if last_K >= 1:
+                last_K -= 1
+            remember = 'P'
+    if last_K < 0:
+        last_K = 0
+    if last_P < 0:
+        last_P = 0
+
+print(last_K + last_P)
+
+###########################################
+성대 솔루션
+c. 개구리
+
+마지막으로 P를 말했던 개구리는 다음에는 K를 말해야 합니다. 비슷하게 마지막으로 K를 말
+했던 개구리는 다음에 P를 말해야 하죠.
+입력으로 주어지는 문자열을 첫 문자부터 읽을겁니다. 특정 상황에서 마지막으로 P를 말했
+던 개구리가 총 p마리 있는 상황이고, 마지막으로 K를 말했던 개구리가 총 k마리 있다고 합
+시다. 만약 다음 문자가 P라면 어떻게 될까요? k는 1 감소하고 p는 1 증가하겠죠. K가 나오
+면 k는 1증가하고 p는 1 감소합니다. 만약 이렇게 바뀐 p, k값에 음수가 있다면 이는 추가적
+인 개구리가 필요한 상황이란 겁니다. 따라서 정답을 증가시켜줍니다.
