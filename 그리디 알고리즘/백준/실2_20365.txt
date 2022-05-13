@@ -1,0 +1,25 @@
+N = int(input())
+data = input()
+count_B = 0
+count_R = 0
+length = len(data)
+
+if data[0] == "B":
+    remember = "B"
+    count_B += 1
+else:
+    remember = "R"
+    count_R += 1
+
+for i in range(1, length):
+    if remember != data[i]:
+        if data[i] == "B":
+            count_B += 1
+        else:
+            count_R += 1
+        remember = data[i]
+
+if (count_B <= count_R):
+    print(count_B + 1)
+else:
+    print(count_R + 1)
