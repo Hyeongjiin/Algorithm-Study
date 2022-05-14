@@ -1,0 +1,17 @@
+import sys
+input = sys.stdin.readline
+N, M = map(int, input().split())
+data = list(map(int, input().split()))
+
+for i in range(M):
+    data.sort()
+    combine = data[0] + data[1]
+    data[0] = combine
+    data[1] = combine
+
+sum = 0
+
+for i in range(len(data)):
+    sum += data[i]
+
+print(sum)

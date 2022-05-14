@@ -1,0 +1,12 @@
+data = input()
+data = data.split("-", 1)
+sum1 = data[0].split("+")
+if len(data) >= 2:
+    sum2 = data[1].replace("-", "+").split("+")
+total = 0
+for i in range(len(sum1)):
+    total += int(sum1[i])
+if len(data) >= 2:
+    for i in range(len(sum2)):
+        total -= int(sum2[i])
+print(total)
