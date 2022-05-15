@@ -1,0 +1,15 @@
+N, K, T = map(int, input().split())
+data = list(map(int, input().split()))
+data.sort(reverse = True)
+length = sum(data) // K
+result = 0
+for i in range(length):
+    result += data[i]
+result = sum(data) - result
+
+if sum(data) % K != 0:
+    print("NO")  
+elif result <= T:
+    print("YES")
+else:
+    print("NO")

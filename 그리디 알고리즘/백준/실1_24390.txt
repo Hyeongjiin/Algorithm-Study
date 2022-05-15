@@ -1,0 +1,14 @@
+N = list(map(int, input().split(":")))
+count = 0
+start = 0
+if N[1] >= 30:
+    N[1] -= 30
+    count += 1
+    start = 1
+count += N[0] // 10
+count += N[0] % 10
+count += N[1] // 10
+if start == 0:
+    print(count + 1)
+else:
+    print(count)

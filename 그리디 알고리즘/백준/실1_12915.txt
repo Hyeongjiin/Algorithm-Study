@@ -1,0 +1,51 @@
+data = list(map(int, input().split()))
+result = 0
+count_Easy = data[0] + data[1]
+count_Middle = data[1] + data[2] + data[3]
+count_Hard = data[3] + data[4]
+while True:
+    flag_Easy = 0
+    flag_Middle = 0
+    flag_Hard = 0
+    if data[0] > 0:
+        data[0] -= 1
+        count_Easy -= 1
+        flag_Easy = 1
+    elif data[1] > 0:
+        data[1] -= 1
+        count_Easy -= 1
+        count_Middle -= 1
+        flag_Easy = 1
+    
+    if data[2] > 0:
+        data[2] -= 1
+        count_Middle -= 1
+        flag_Middle = 1
+    elif data[3] > data[1]:
+        data[3] -= 1
+        count_Hard -= 1
+        count_Middle -= 1
+        flag_Middle = 1
+    else:
+        data[1] -= 1
+        count_Easy -= 1
+        count_Middle -= 1
+        flag_Middle = 1
+    
+    if data[4] > 0:
+        data[4] -= 1
+        count_Hard -= 1
+        flag_Hard = 1
+    elif data[3] > 0:
+        data[3] -= 1
+        count_Hard -= 1
+        count_Middle -= 1
+        flag_Hard = 1
+
+    if (flag_Easy == 1 and flag_Middle == 1 and flag_Hard == 1):
+        result += 1
+
+    if count_Easy == 0 or count_Middle == 0 or count_Hard == 0:
+        break
+
+print(result)
