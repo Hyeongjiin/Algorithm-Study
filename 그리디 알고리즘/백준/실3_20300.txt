@@ -1,0 +1,19 @@
+N = input()
+data = list(map(int, input().split()))
+data.sort()
+length = len(data)
+
+if length % 2 == 0:
+    maxi = 0
+    for i in range(length // 2):
+        total = data[i] + data[length - 1 - i]
+        if (total > maxi):
+            maxi = total
+else:
+    maxi = data[length - 1]
+    for i in range(length // 2):
+        total = data[i] + data[length - 2 - i]
+        if (total > maxi):
+            maxi = total
+
+print(maxi)
