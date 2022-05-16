@@ -1,0 +1,74 @@
+K, S, N = input().split()
+K_X = ord(K[0]) - ord("A") + 1
+K_Y = int(K[1])
+S_X = ord(S[0]) - ord("A") + 1
+S_Y = int(S[1])
+N = int(N)
+
+for i in range(N):
+    move = input()
+    K_Xmove = K_X
+    K_Ymove = K_Y
+    S_Xmove = S_X
+    S_Ymove = S_Y
+    if move == "R":
+        K_Xmove = K_X + 1
+        K_Ymove = K_Y
+        S_Xmove = S_X + 1
+        S_Ymove = S_Y
+    elif move == "L":
+        K_Xmove = K_X - 1
+        K_Ymove = K_Y
+        S_Xmove = S_X - 1
+        S_Ymove = S_Y
+    elif move == "B":
+        K_Xmove = K_X 
+        K_Ymove = K_Y - 1
+        S_Xmove = S_X 
+        S_Ymove = S_Y - 1
+    elif move == "T":
+        K_Xmove = K_X
+        K_Ymove = K_Y + 1
+        S_Xmove = S_X
+        S_Ymove = S_Y + 1
+    elif move == "RT":
+        K_Xmove = K_X + 1
+        K_Ymove = K_Y + 1
+        S_Xmove = S_X + 1
+        S_Ymove = S_Y + 1
+    elif move == "LT":
+        K_Xmove = K_X - 1
+        K_Ymove = K_Y + 1
+        S_Xmove = S_X - 1
+        S_Ymove = S_Y + 1
+    elif move == "RB":
+        K_Xmove = K_X + 1
+        K_Ymove = K_Y - 1
+        S_Xmove = S_X + 1
+        S_Ymove = S_Y - 1
+    elif move == "LB":
+        K_Xmove = K_X - 1
+        K_Ymove = K_Y - 1
+        S_Xmove = S_X - 1
+        S_Ymove = S_Y - 1
+
+    if K_Xmove != S_X or K_Ymove != S_Y:
+        if 1 <= K_Xmove <= 8 and 1 <= K_Ymove <= 8:
+            K_X = K_Xmove
+            K_Y = K_Ymove
+        else: 
+            continue
+    else:
+        if (1 <= K_Xmove <= 8 and 1 <= K_Ymove <= 8) and (1 <= S_Xmove <= 8 and 1 <= S_Ymove <= 8):
+            K_X = K_Xmove
+            K_Y = K_Ymove
+            S_X = S_Xmove
+            S_Y = S_Ymove
+        else:
+            continue
+
+K_X = chr(ord("A") + K_X - 1)
+S_X = chr(ord("A") + S_X - 1)
+
+print("%c%d" %(K_X, K_Y))
+print("%c%d" %(S_X, S_Y))
