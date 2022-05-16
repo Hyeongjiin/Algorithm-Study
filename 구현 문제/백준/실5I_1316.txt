@@ -1,0 +1,32 @@
+N = int(input())
+count = 0
+
+def group_checker(word):  
+    length = len(word)
+    for i in range(length - 2):
+        for k in range(i + 2, length):
+            if word[i] == word[i + 1]:
+                continue
+            if word[i] == word[k]:
+                return False
+    return True
+
+for i in range(N):
+    data = input()
+    if group_checker(data):
+        count += 1
+
+print(count)
+
+#########################################
+
+import sys
+def rl(): return sys.stdin.readline()
+
+total = 0
+
+for i in range(int(rl())):
+    word = rl()
+    if list(word) == sorted(word, key=word.find):
+        total += 1
+print(total)

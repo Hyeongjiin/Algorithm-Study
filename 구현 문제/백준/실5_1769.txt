@@ -1,0 +1,42 @@
+N = input()
+N = sum(list(map(int, N)))
+count = 0
+if N >= 10:
+    count += 1
+
+while N >= 10:
+    N = str(N)
+    N = sum(list(map(int, N)))
+    count += 1
+
+print(count)
+if N % 3 == 0:
+    print("YES")
+else:
+    print("NO")
+
+###################################
+
+N = input()
+
+sum = 0
+for i in range(len(N)):
+    sum += int(N[i])
+N = str(sum)
+
+count = 0
+if sum >= 10:
+    count += 1
+
+while sum >= 10:
+    sum = 0
+    for i in range(len(N)):
+        sum += int(N[i])
+    N = str(sum)
+    count += 1
+
+print(count)
+if sum % 3 == 0:
+    print("YES")
+else:
+    print("NO")
