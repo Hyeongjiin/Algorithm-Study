@@ -1,0 +1,16 @@
+A, B = map(int, input().split())
+sum_B = 0
+count = 0
+flag = 0
+for i in range(1, B + 1):
+    if flag == 1:
+        break
+    for k in range(1, i + 1):
+        if count >= A - 1:
+            sum_B += i
+        count += 1
+        if B == count:
+            flag = 1
+            break
+
+print(sum_B)
