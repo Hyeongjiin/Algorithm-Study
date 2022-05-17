@@ -1,0 +1,41 @@
+N, S, P = map(int, input().split())
+data = []
+if N > 0:
+    data = list(map(int, input().split()))
+data.append(S)
+data.sort(reverse = True)
+
+length = len(data)
+overlap = data.count(S)
+Su = 0
+count = 0
+
+for i in range(length):
+    count += 1
+    if data[i] == S:
+        Su = i + overlap - 1
+        if Su <= P - 1:
+            print(i + 1)
+            break
+        else:
+            print(-1)
+            break
+    if count == P:
+        print(-1)
+        break
+
+###############################################
+
+N,S,P = map(int, input().split())
+if N==0:
+    print('1')
+    exit(0)
+board = list(map(int, input().split()))
+if N==P and board[-1]>=S:
+    print('-1')
+else:
+    Rank = 1
+    for i in board:
+        if i > S:
+            Rank += 1
+    print(Rank)
