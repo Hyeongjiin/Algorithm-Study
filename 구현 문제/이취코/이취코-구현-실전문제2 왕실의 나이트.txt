@@ -1,0 +1,11 @@
+N = input()
+row = int(N[1])
+column = ord(N[0]) - ord("a") + 1
+count = 0
+move = [(2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (-1, 2), (1, -2), (-1, -2)]
+for i in move:
+    next_row = row + i[0]
+    next_column = column + i[1]
+    if 1 <= next_row <= 8 and 1 <= next_column <= 8:
+        count += 1
+print(count)
