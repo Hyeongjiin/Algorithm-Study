@@ -1,0 +1,27 @@
+import sys
+input = sys.stdin.readline
+while True:
+    N = int(input())
+    if N == 0:
+        break
+    data = []
+    count = 0
+    for i in range(N):
+        charge = int(input())
+        data.append(charge)
+        if charge >= 1322:
+            count = 1
+    data.sort()
+    current = 0
+    fuel = 0
+    flag = 0
+    for i in range(len(data)):
+        if current + fuel >= data[i]:
+            current = data[i]
+            fuel = 200
+            if current >= 1322 and count > 0:
+                flag = 1
+    if flag == 1:
+        print("POSSIBLE")
+    else:
+        print("IMPOSSIBLE")
