@@ -1,0 +1,13 @@
+import sys
+N = sys.stdin.readline().rstrip()
+length = len(N)
+N = int(N)
+count = 0
+
+for i in range(length):
+    if i == length - 1:
+        count += (N - 10 ** (length - 1) + 1) * length
+    else:
+        count += (9 * (10 ** i)) * (i + 1)
+
+print(count)
