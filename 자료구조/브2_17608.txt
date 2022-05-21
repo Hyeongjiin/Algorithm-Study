@@ -1,0 +1,15 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+stack = [int(input()) for _ in range(N)]
+
+max = stack.pop()
+count = 1
+
+while stack:
+    stick = stack.pop()
+    if stick > max:
+        max = stick
+        count += 1
+
+print(count)
