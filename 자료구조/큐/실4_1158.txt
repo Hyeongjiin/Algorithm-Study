@@ -1,0 +1,21 @@
+from collections import deque
+N, K = map(int, input().split())
+queue = deque()
+for i in range(N):
+    queue .append(i + 1)
+result = []
+while queue:
+    for i in range(K - 1):
+        queue.append(queue.popleft())
+    result.append(queue.popleft())
+
+if len(result) == 1:
+    print("<%d>" %result[i])
+else:
+    for i in range(len(result)):
+        if i == 0:
+            print("<%d," %result[i], end=' ')
+        elif i == len(result) - 1:
+            print("%d>" %result[i])
+        else:
+            print("%d," %result[i], end=' ')

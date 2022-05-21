@@ -1,0 +1,12 @@
+import sys
+put = sys.stdin.readline
+N = int(input())
+ticket = [0 for i in range(N + 2)]
+sold = list(map(int, input().split()))
+for i in range(N):
+    if sold[i] <= N:
+        ticket[sold[i]] = 1
+for i in range(1, N + 2):
+    if ticket[i] == 0:
+        print(i)
+        break
