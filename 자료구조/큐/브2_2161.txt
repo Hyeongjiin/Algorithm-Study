@@ -1,0 +1,17 @@
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+N = int(input())
+deck = deque()
+discard = deque()
+for i in range(N):
+    deck.append(i + 1)
+
+while len(deck) > 1:
+    discard.append(deck.popleft())
+    deck.append(deck.popleft())
+    
+for i in discard:
+    print(i, end=' ')
+print(deck[0])
