@@ -1,0 +1,59 @@
+DFS
+def jump(x, y):
+    if x < 0 or y < 0 or x >= N or y >= N:
+        return False
+    if been[x][y] == True:
+        return False
+    been[x][y] = True
+    if graph[x][y] == -1:
+        graph[x][y] = -2
+        return True
+    else:
+      jump(x + graph[x][y], y)
+      jump(x, y + graph[x][y])
+
+N = int(input())
+graph = []
+been = [[False] * N for _ in range(N)]
+for i in range(N):
+    graph.append(list(map(int, input().split())))
+jump(0, 0)
+if graph[N - 1][N - 1] == -2:
+    print("HaruHaru")
+else:
+    print("Hing")
+
+
+########################################
+BFS
+from collections import deque
+
+def jump(x, y):
+    queue = deque()
+    queue.append((x, y))
+    while queue:
+        x, y = queue.popleft()
+        if x == N - 1 and y == N - 1:
+            graph[x][y] = -2
+        if been[x][y] == True:
+            continue
+        been[x][y] = True
+        nx = x + graph[x][y]
+        ny = y + graph[x][y]
+        if nx >= 0 and nx < N:
+            queue.append((nx, y))
+            jump(nx, y)
+        if ny >= 0 and ny < N:
+            queue.append((x, ny))
+            jump(x, ny)
+          
+N = int(input())
+graph = []
+been = [[False] * N for _ in range(N)]
+for i in range(N):
+    graph.append(list(map(int, input().split())))
+jump(0, 0)
+if graph[N - 1][N - 1] == -2:
+    print("HaruHaru")
+else:
+    print("Hing")

@@ -1,0 +1,33 @@
+def tile(x, y, flag):
+    if x < 0 or y < 0 or x >= N or y >= M:
+        return False
+    if graph[x][y] == '-' and flag == 1:
+        graph[x][y] = '*'
+        tile(x, y + 1, flag)
+        tile(x, y - 1, flag)
+        return True
+    elif graph[x][y] == '|' and flag == 2:
+        graph[x][y] = '*'
+        tile(x + 1, y, flag)
+        tile(x - 1, y, flag)
+        return True
+    else:
+        return False
+
+N, M = map(int, input().split())
+graph = []
+for i in range(N):
+    graph.append(list(input()))
+count = 0
+for i in range(N):
+    for k in range(M):
+        if graph[i][k] == '-':
+            flag = 1
+        elif graph[i][k] == '|':
+            flag = 2
+        else:
+            flag = 3
+        if tile(i, k, flag):
+            count += 1
+
+print(count)
