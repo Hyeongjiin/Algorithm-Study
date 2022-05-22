@@ -1,0 +1,52 @@
+DFS
+import sys
+
+def dfs(start, graph, been, cnt):
+    been[start] = True
+    cnt.append(start)
+    for i in graph[start]:
+        if not been[i]:
+            dfs(i, graph, been, cnt)
+
+N = int(sys.stdin.readline().rstrip())
+graph = [[] for _ in range(N + 1)]
+been = [False for _ in range(N + 1)]
+M = int(sys.stdin.readline().rstrip())
+for i in range(M):
+    C1, C2 = map(int, sys.stdin.readline().split())
+    graph[C1].append(C2)
+    graph[C2].append(C1)
+  
+cnt = []
+dfs(1, graph, been, cnt)
+print(len(cnt) - 1)
+
+########################################
+BFS
+from collections import deque
+import sys
+
+def bfs(start, graph, been, cnt):
+    queue = deque()
+    queue.append(start)
+    been[start] = True
+    while queue:
+        num = queue.popleft()
+        for i in graph[num]:
+            if not been[i]:
+                queue.append(i)
+                been[i] = True
+                cnt.append(i)
+
+N = int(sys.stdin.readline().rstrip())
+graph = [[] for _ in range(N + 1)]
+been = [False for _ in range(N + 1)]
+M = int(sys.stdin.readline().rstrip())
+for i in range(M):
+    C1, C2 = map(int, sys.stdin.readline().split())
+    graph[C1].append(C2)
+    graph[C2].append(C1)
+  
+cnt = []
+bfs(1, graph, been, cnt)
+print(len(cnt))

@@ -1,0 +1,81 @@
+DFS
+import sys
+sys.setrecursionlimit(10 ** 6)
+
+def dfs(y, x):
+    if x < 0 or y < 0 or x >= N or y >= M:
+        return 0
+    if place[y][x] == 0:
+        place[y][x] = -1
+        return 1 + dfs(y + 1, x) + dfs(y - 1, x) + dfs(y, x + 1) + dfs(y, x - 1)
+    else:
+        return 0
+        
+M, N, K = map(int, input().split())
+place = [[0] * N for _ in range(M)]
+for i in range(K):
+    square = list(map(int, input().split()))
+    for i in range(square[0], square[2]):
+        for k in range(square[1], square[3]):
+            place[k][i] = 1
+
+cnt = []
+for i in range(M):
+    for k in range(N):
+        count = dfs(i, k)
+        if count > 0:
+            cnt.append(count)
+
+cnt.sort()
+print(len(cnt))
+for i in range(len(cnt)):
+    if i == len(cnt) - 1:
+        print(cnt[i])
+    else:
+        print(cnt[i], end=' ')
+
+#####################################
+BFS
+import sys
+from collections import deque
+sys.setrecursionlimit(10 ** 6)
+
+def bfs(y, x):
+    queue = deque()
+    queue.append((y, x))
+    num = 0
+    while queue:
+        y, x = queue.popleft()
+        if x < 0 or y < 0 or x >= N or y >= M:
+            continue
+        if place[y][x] == 0:
+            place[y][x] = -1
+            num += 1
+            queue.append((y + 1, x))
+            queue.append((y - 1, x))
+            queue.append((y, x + 1))
+            queue.append((y, x - 1))
+    return num
+
+M,N,K = map(int, sys.stdin.readline().split())
+place = [[0] * N for _ in range(M)]
+for i in range(K):
+    square = list(map(int, sys.stdin.readline().split()))
+    for i in range(square[0], square[2]):
+        for k in range(square[1], square[3]):
+            place[k][i] = 1
+
+cnt = []
+for i in range(M):
+    for k in range(N):
+        count = bfs(i, k)
+        if count > 0:
+            cnt.append(count)
+
+cnt.sort()
+print(len(cnt))
+for i in range(len(cnt)):
+    if i == len(cnt) - 1:
+        print(cnt[i])
+    else:
+        print(cnt[i], end=' ')
