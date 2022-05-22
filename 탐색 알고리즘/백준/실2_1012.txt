@@ -1,0 +1,66 @@
+DFS
+import sys
+sys.setrecursionlimit(10**6)
+
+def dfs(y, x):
+    if y < 0 or x < 0 or y >= N or x >= M:
+        return False
+    if space[y][x] == 1:
+        space[y][x] = -1
+        dfs(y + 1, x)
+        dfs(y - 1, x)
+        dfs(y, x + 1)
+        dfs(y, x - 1)
+        return True
+        
+T = int(sys.stdin.readline().rstrip())
+for i in range(T):
+    M, N, K = map(int, sys.stdin.readline().split())
+    space = [[0] * M for _ in range(N)]
+    for k in range(K):
+        X, Y = map(int, sys.stdin.readline().split())
+        space[Y][X] = 1
+    cnt = 0
+    for k in range(N):
+        for j in range(M):
+            if dfs(k, j):
+                cnt += 1
+    print(cnt)
+
+########################################
+BFS
+from collections import deque
+import sys
+
+def bfs(y, x):
+    queue = deque()
+    queue.append((y, x))
+    flag = 0
+    if space[y][x] == 1:
+        flag = 1
+    while queue:
+        y, x = queue.popleft()
+        if y < 0 or x < 0 or y >= N or x >= M:
+            continue
+        if space[y][x] == 1:
+            space[y][x] = -1
+            queue.append((y + 1, x))
+            queue.append((y - 1, x))
+            queue.append((y, x + 1))
+            queue.append((y, x - 1))
+    return flag
+
+T = int(sys.stdin.readline().rstrip())
+for i in range(T):
+    M, N, K = map(int, sys.stdin.readline().split())
+    space = [[0] * M for _ in range(N)]
+    for k in range(K):
+        X, Y = map(int, sys.stdin.readline().split())
+        space[Y][X] = 1
+    cnt = 0
+    for k in range(N):
+        for j in range(M):
+            flag = bfs(k, j)
+            if flag == 1:
+                cnt += 1
+    print(cnt)
