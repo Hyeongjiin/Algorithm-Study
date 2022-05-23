@@ -1,0 +1,44 @@
+DFS + BFS
+from collections import deque
+import sys
+
+def dfs(V):
+    if visited[V] == False:
+        visited[V] = True
+        for i in graph[V]:
+            if not visited[i]:
+                dfs(i)
+        return True
+
+def bfs(V):
+    queue = deque()
+    queue.append(V)
+    flag = 0
+    if visited[V] == False:
+        flag = 1
+    while queue:
+        M = queue.popleft()
+        if visited[M] == False:
+            visited[M] = True
+            for i in graph[M]:
+                queue.append(i)
+    if flag == 1:
+        return True
+    else:
+        return False
+    
+
+input = sys.stdin.readline
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+visited = [False] * (N + 1)
+for i in range(M):
+    P1, P2 = map(int, input().split())
+    graph[P1].append(P2)
+    graph[P2].append(P1)
+cnt = 0
+for i in range(1, N + 1):
+    if bfs(i):
+        cnt += 1
+
+print(cnt)
