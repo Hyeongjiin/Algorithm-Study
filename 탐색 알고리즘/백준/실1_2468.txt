@@ -1,0 +1,90 @@
+DFS
+import sys
+sys.setrecursionlimit(10**6)
+
+def dfs(y, x, r):
+    if y < 0 or x < 0 or y >= N or x >= N:
+        return False
+    if place[y][x] > r and visited[y][x] == False:
+        visited[y][x] = True
+        dfs(y + 1, x, r)
+        dfs(y - 1, x, r)
+        dfs(y, x + 1, r)
+        dfs(y, x - 1, r)
+        return True
+    else:
+        return False
+      
+input = sys.stdin.readline
+
+N = int(input())
+place = []
+high = 0
+tmp = 0
+for i in range(N):
+    nums = list(map(int, input().split()))
+    tmp = max(nums)
+    if tmp > high:
+        high = tmp
+    place.append(nums)
+max = 0
+for h in range(high + 1):
+    cnt = 0
+    visited = [[False] * N for _ in range(N)]
+    for i in range(N):
+        for k in range(N):
+            if dfs(i, k, h):
+                cnt += 1
+    if cnt > max:
+        max = cnt
+
+print(max)
+#########################################
+BFS
+from collections import deque
+import sys
+
+def bfs(y, x, r):
+    queue = deque()
+    queue.append((y, x, r))
+    flag = 0
+    while queue:
+        y, x, r = queue.popleft()
+        if y < 0 or x < 0 or y >= N or x >= N:
+            continue
+        if place[y][x] > r and visited[y][x] == False:
+            visited[y][x] = True
+            flag = 1
+            queue.append((y + 1, x, r))
+            queue.append((y - 1, x, r))
+            queue.append((y, x + 1, r))
+            queue.append((y, x - 1, r))
+    if flag == 1:
+        return True
+    else:
+        return False
+       
+input = sys.stdin.readline
+
+N = int(input())
+place = []
+high = 0
+tmp = 0
+for i in range(N):
+    nums = list(map(int, input().split()))
+    tmp = max(nums)
+    if tmp > high:
+        high = tmp
+    place.append(nums)
+max = 0
+for h in range(high + 1):
+    cnt = 0
+    visited = [[False] * N for _ in range(N)]
+    for i in range(N):
+        for k in range(N):
+            if bfs(i, k, h):
+                cnt += 1
+    if cnt > max:
+        max = cnt
+
+print(max)

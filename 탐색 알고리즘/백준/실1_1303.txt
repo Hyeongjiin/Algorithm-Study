@@ -1,0 +1,88 @@
+DFS
+import sys 
+
+def dfsW(y, x):
+    if y < 0 or x < 0 or y >= M or x >= N:
+        return 0
+    if place[y][x] == 'W':
+        place[y][x] = 'V'
+        return 1 + dfsW(y + 1, x) + dfsW(y - 1, x) + dfsW(y, x + 1) + dfsW(y, x - 1)
+    else:
+        return 0
+
+def dfsB(y, x):
+    if y < 0 or x < 0 or y >= M or x >= N:
+        return 0
+    if place[y][x] == 'B':
+        place[y][x] = 'V'
+        return 1 + dfsB(y + 1, x) + dfsB(y - 1, x) + dfsB(y, x + 1) + dfsB(y, x - 1)
+    else:
+        return 0
+
+input = sys.stdin.readline
+      
+N, M = map(int, input().split())
+place = []
+for i in range(M):
+    place.append(list(input()))
+pW = 0
+pB = 0
+for i in range(M):
+    for k in range(N):
+        pW += dfsW(i, k) ** 2
+        pB += dfsB(i, k) ** 2
+
+print(pW, pB)
+########################################
+BFS
+from collections import deque
+import sys 
+
+def bfsW(y, x):
+    queue = deque()
+    queue.append((y, x))
+    cnt = 0
+    while queue:
+        y, x = queue.popleft()
+        if y < 0 or x < 0 or y >= M or x >= N:
+            continue
+        if place[y][x] == 'W':
+            place[y][x] = 'V'
+            cnt += 1
+            queue.append((y + 1, x))
+            queue.append((y - 1, x))
+            queue.append((y, x + 1))
+            queue.append((y, x - 1))         
+    return cnt
+
+def bfsB(y, x):
+    queue = deque()
+    queue.append((y, x))
+    cnt = 0
+    while queue:
+        y, x = queue.popleft()
+        if y < 0 or x < 0 or y >= M or x >= N:
+            continue
+        if place[y][x] == 'B':
+            place[y][x] = 'V'
+            cnt += 1
+            queue.append((y + 1, x))
+            queue.append((y - 1, x))
+            queue.append((y, x + 1))
+            queue.append((y, x - 1))         
+    return cnt
+
+input = sys.stdin.readline
+      
+N, M = map(int, input().split())
+place = []
+for i in range(M):
+    place.append(list(input()))
+pW = 0
+pB = 0
+for i in range(M):
+    for k in range(N):
+        pW += bfsW(i, k) ** 2
+        pB += bfsB(i, k) ** 2
+
+print(pW, pB)
