@@ -1,0 +1,52 @@
+BFS
+from collections import deque
+import sys
+
+def bfs(z, y, x, cnt):
+    queue = deque()
+    queue.append((z, y, x, cnt))
+    while queue:
+        z, y, x, cnt = queue.popleft()
+        if z < 0 or y < 0 or x < 0 or z >= L or y >= R or x >= C:
+            continue
+        if place[z][y][x] == 'E':
+            return cnt
+        if place[z][y][x] == 'S' or place[z][y][x] == '.':
+            cnt += 1
+            place[z][y][x] = 'V'
+            queue.append((z + 1, y, x, cnt))
+            queue.append((z - 1, y, x, cnt))
+            queue.append((z, y + 1, x, cnt))
+            queue.append((z, y - 1, x, cnt))
+            queue.append((z, y, x + 1, cnt))
+            queue.append((z, y, x - 1, cnt))
+        else:
+            continue
+    return -1
+
+input = sys.stdin.readline
+
+while True:
+    L, R, C = map(int, input().split())
+    S_Z = 0
+    S_X = 0
+    S_Y = 0
+    if L == 0 and R == 0 and C == 0:
+        break
+    place = [[] for _ in range(L)]
+    for i in range(L):
+        for k in range(R):
+            place[i].append(list(input().rstrip()))
+        tmp = input()
+    for i in range(L):
+        for k in range(R):
+            for j in range(C):
+                if place[i][k][j] == 'S':
+                    S_Z = i
+                    S_Y = k
+                    S_X = j
+    result = bfs(S_Z, S_Y, S_X, 0)
+    if result == -1:
+        print("Trapped!")
+    else:
+        print("Escaped in %d minute(s)." % result)
