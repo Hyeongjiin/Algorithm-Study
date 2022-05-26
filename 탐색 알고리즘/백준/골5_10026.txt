@@ -1,0 +1,187 @@
+DFS
+import sys
+sys.setrecursionlimit(10**6)
+
+def dfsR(y, x):
+    if y < 0 or x < 0 or y >= N or x >= N:
+        return False
+    if place[y][x] == 'R' and visited[y][x] == False:
+        visited[y][x] = True
+        dfsR(y + 1, x)
+        dfsR(y - 1, x)
+        dfsR(y, x + 1)
+        dfsR(y, x - 1)
+        return True
+
+def dfsG(y, x):
+    if y < 0 or x < 0 or y >= N or x >= N:
+        return False
+    if place[y][x] == 'G' and visited[y][x] == False:
+        visited[y][x] = True
+        dfsG(y + 1, x)
+        dfsG(y - 1, x)
+        dfsG(y, x + 1)
+        dfsG(y, x - 1)
+        return True
+
+def dfsB(y, x):
+    if y < 0 or x < 0 or y >= N or x >= N:
+        return False
+    if place[y][x] == 'B' and visited[y][x] == False:
+        visited[y][x] = True
+        dfsB(y + 1, x)
+        dfsB(y - 1, x)
+        dfsB(y, x + 1)
+        dfsB(y, x - 1)
+        return True
+
+def dfsRG(y, x):
+    if y < 0 or x < 0 or y >= N or x >= N:
+        return False
+    if ((place[y][x] == 'R' or place[y][x] == 'G') and visited[y][x] == False):
+        visited[y][x] = True
+        dfsRG(y + 1, x)
+        dfsRG(y - 1, x)
+        dfsRG(y, x + 1)
+        dfsRG(y, x - 1)
+        return True
+
+input = sys.stdin.readline
+N = int(input())
+place = []
+visited = [[False] * N for _ in range(N)]
+for i in range(N):
+    place.append(list(input().rstrip()))
+cnt = 0
+for i in range(N):
+    for k in range(N):
+        if dfsR(i, k):
+            cnt += 1
+        if dfsG(i, k):
+            cnt += 1
+        if dfsB(i, k):
+            cnt += 1
+print(cnt, end=' ')
+cnt = 0
+visited = [[False] * N for _ in range(N)]
+for i in range(N):
+    for k in range(N):
+        if dfsRG(i, k):
+            cnt += 1
+        if dfsB(i, k):
+            cnt += 1
+print(cnt)          
+##################################################
+BFS
+from collections import deque
+import sys
+
+def bfsR(y, x):
+    queue = deque()
+    queue.append((y, x))
+    flag = 0
+    if place[y][x] == 'R' and visited[y][x] == False:
+        flag = 1
+    while queue:
+        h, w = queue.popleft()
+        if h < 0 or w < 0 or h >= N or w >= N:
+            continue
+        if place[h][w] == 'R' and visited[h][w] == False:
+            visited[h][w] = True
+            queue.append((h + 1, w))
+            queue.append((h - 1, w))
+            queue.append((h, w + 1))
+            queue.append((h, w - 1))
+    if flag == 0:
+        return False
+    else:
+        return True
+
+def bfsG(y, x):
+    queue = deque()
+    queue.append((y, x))
+    flag = 0
+    if place[y][x] == 'G' and visited[y][x] == False:
+        flag = 1
+    while queue:
+        h, w = queue.popleft()
+        if h < 0 or w < 0 or h >= N or w >= N:
+            continue
+        if place[h][w] == 'G' and visited[h][w] == False:
+            visited[h][w] = True
+            queue.append((h + 1, w))
+            queue.append((h - 1, w))
+            queue.append((h, w + 1))
+            queue.append((h, w - 1))
+    if flag == 0:
+        return False
+    else:
+        return True
+
+def bfsB(y, x):
+    queue = deque()
+    queue.append((y, x))
+    flag = 0
+    if place[y][x] == 'B' and visited[y][x] == False:
+        flag = 1
+    while queue:
+        h, w = queue.popleft()
+        if h < 0 or w < 0 or h >= N or w >= N:
+            continue
+        if place[h][w] == 'B' and visited[h][w] == False:
+            visited[h][w] = True
+            queue.append((h + 1, w))
+            queue.append((h - 1, w))
+            queue.append((h, w + 1))
+            queue.append((h, w - 1))
+    if flag == 0:
+        return False
+    else:
+        return True
+
+def bfsRG(y, x):
+    queue = deque()
+    queue.append((y, x))
+    flag = 0
+    if ((place[y][x] == 'R' or place[y][x] == "G") and visited[y][x] == False):
+        flag = 1
+    while queue:
+        h, w = queue.popleft()
+        if h < 0 or w < 0 or h >= N or w >= N:
+            continue
+        if ((place[h][w] == 'R' or place[h][w] == 'G') and visited[h][w] == False):
+            visited[h][w] = True
+            queue.append((h + 1, w))
+            queue.append((h - 1, w))
+            queue.append((h, w + 1))
+            queue.append((h, w - 1))
+    if flag == 0:
+        return False
+    else:
+        return True
+
+input = sys.stdin.readline
+N = int(input())
+place = []
+visited = [[False] * N for _ in range(N)]
+for i in range(N):
+    place.append(list(input().rstrip()))
+cnt = 0
+for i in range(N):
+    for k in range(N):
+        if bfsR(i, k):
+            cnt += 1
+        if bfsG(i, k):
+            cnt += 1
+        if bfsB(i, k):
+            cnt += 1
+print(cnt, end=' ')
+cnt = 0
+visited = [[False] * N for _ in range(N)]
+for i in range(N):
+    for k in range(N):
+        if bfsRG(i, k):
+            cnt += 1
+        if bfsB(i, k):
+            cnt += 1
+print(cnt)                 
