@@ -1,0 +1,33 @@
+파이썬 정렬 라이브러리 O(NlogN)
+import sys
+
+input = sys.stdin.readline
+N = int(input())
+data = []
+for i in range(N):
+    data.append(int(input()))
+data.sort()
+maxW = 0
+for i in range(N):
+    W = data[i] * (N - i)
+    if W > maxW:
+        maxW = W
+print(maxW)
+-------------------------------
+계수 정렬 O(N + K)
+import sys
+
+input = sys.stdin.readline
+N = int(input())
+data = [0] * 10001
+for i in range(N):
+    data[int(input())] += 1
+cnt = 0
+maxW = 0
+for i in range(10000, 0, -1):
+    if data[i] == 0:
+        continue
+    else:
+        cnt += data[i]
+        maxW = max(maxW, cnt * i)
+print(maxW)

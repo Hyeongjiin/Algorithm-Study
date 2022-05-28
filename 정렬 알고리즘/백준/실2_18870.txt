@@ -1,0 +1,50 @@
+import sys
+
+input = sys.stdin.readline
+
+N = int(input())
+data = list(map(int, input().split(' ')))
+data_P = []
+
+for i in range(N):
+    data_P.append([i, data[i]])
+
+data_P.sort(key=lambda x: x[1])
+
+cordi = 0
+current = data_P[0][1]
+remember = data_P[0][1]
+for i in range(N):
+    if i > 0:
+        current = data_P[i][1]
+        remember = data_P[i - 1][1]
+    if current == remember:
+        data_P[i].append(cordi)
+    else:
+        cordi += 1
+        data_P[i].append(cordi)
+      
+data_P.sort(key=lambda x: x[0])
+
+for i in data_P:
+    print(i[2], end=' ')
+
+###########################
+What a clever way to do it?!
+import sys
+
+input = sys.stdin.readline
+
+N = int(input())
+data = list(map(int, input().split(' ')))
+data_U = list(set(data))
+data_U.sort()
+order = {}
+cnt = 0
+for i in data_U:
+    order[i] = cnt 
+    cnt += 1
+for i in range(N):
+    data[i] = order[data[i]]
+for i in data:
+    print(i, end=' ')

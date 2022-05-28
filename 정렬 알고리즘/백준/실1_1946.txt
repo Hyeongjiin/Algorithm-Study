@@ -1,0 +1,42 @@
+import sys
+
+input = sys.stdin.readline
+
+T = int(input())
+for i in range(T):
+    N = int(input())
+    data = []
+    for i in range(N):
+        info = input().split()
+        data.append((int(info[0]), int(info[1])))
+    data = sorted(data, key = lambda x:x[0])
+    min_rank = data[0][1]
+    cnt = 0
+    for i in range(1, N):
+        if data[i][1] > min_rank:
+            cnt += 1
+        else:
+            min_rank = data[i][1]
+    print(N - cnt)
+
+########################################
+
+import sys
+
+input = sys.stdin.readline
+
+T = int(input())
+for i in range(T):
+    N = int(input())
+    data = [0] * (N + 1)
+    for i in range(N):
+        f, s = map(int, input().split())
+        data[f] = s
+    min_rank = data[1]
+    cnt = 0
+    for i in range(2, N + 1):
+        if data[i] > min_rank:
+            cnt += 1
+        else:
+            min_rank = data[i]
+    print(N - cnt)

@@ -1,0 +1,26 @@
+import sys
+
+input = sys.stdin.readline
+N = int(input())
+stud = []
+for i in range(N):
+    data = input().split()
+    stud.append((data[0], int(data[1]), int(data[2]), int(data[3])))
+stud = sorted(stud, key=lambda x:(-x[1], x[2], -x[3], x[0]))
+for i in stud:
+    print(i[0])
+
+#####################################################
+
+import sys
+
+input = sys.stdin.readline
+N = int(input())
+stud = []
+for i in range(N):
+    data = input().split()
+    stud.append((-int(data[1]), int(data[2]), -int(data[3]), data[0]))
+
+stud.sort()
+for i in stud:
+    print(i[3])

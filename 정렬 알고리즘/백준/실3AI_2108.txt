@@ -1,0 +1,30 @@
+from collections import Counter
+import sys
+
+N = int(sys.stdin.readline().rstrip())
+data = []
+for i in range(N):
+    data.append(int(sys.stdin.readline().rstrip()))
+
+data.sort()
+
+average = round(sum(data)/N)
+
+median = data[len(data)//2]
+
+counter = Counter(data).most_common()
+max_mode = counter[0][1]
+mode = []
+for i in counter:
+    if i[1] == max_mode:
+        mode.append(i)
+
+border = data[-1] - data[0]
+
+print(average)
+print(median)
+if len(mode) > 1:
+    print(mode[1][0])
+else:
+    print(mode[0][0])
+print(border)
