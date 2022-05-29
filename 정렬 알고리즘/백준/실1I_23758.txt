@@ -1,0 +1,14 @@
+import sys
+import math
+
+input = sys.stdin.readline
+
+N = int(input())
+data = list(map(int, input().split()))
+data.sort()
+
+result = 0
+length = int((N + 1) / 2)
+for i in range(length):
+    result += math.floor(math.log2(data[i])) ## result += int(math.log2(data[i]))
+print(result + 1)
