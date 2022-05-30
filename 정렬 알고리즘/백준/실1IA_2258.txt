@@ -1,0 +1,29 @@
+import sys
+
+input = sys.stdin.readline
+
+N ,M = map(int, input().split())
+data = []
+for i in range(N):
+    info = input().split()
+    data.append((int(info[0]), int(info[1])))
+data = sorted(data, key = lambda x:(x[1], -x[0]))
+
+w = 0
+d = 0
+cost = 2147483647
+flag = 0
+
+for i in range(N):
+    w += data[i][0]
+    if i >= 1 and data[i][1] == data[i - 1][1]:
+        d += data[i][1]
+    else:
+        d = 0
+    if w >= M:
+        cost = min(cost, data[i][1] + d)
+        flag = 1
+if flag == 0:
+    print(-1)
+else:
+    print(cost)
