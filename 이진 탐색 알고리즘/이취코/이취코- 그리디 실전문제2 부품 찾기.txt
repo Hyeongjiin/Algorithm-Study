@@ -1,0 +1,37 @@
+import sys
+재귀함수로 구현
+def binary_search(arr, target, start, end):
+    if start > end:
+        return False
+    mid = (start + end) // 2
+    if arr[mid] == target:
+        return True
+    elif arr[mid] > target:
+        return binary_search(arr, target, start, mid - 1)
+    else:
+        return binary_search(arr, target, mid + 1, end)
+반복문으로 구현
+def binary_search(arr, target, start, end):
+    while start <= end:
+        mid = (start + end) // 2
+        if arr[mid] == target:
+            return True
+        elif arr[mid] > target:
+            end = mid - 1
+        else:
+            start = mid + 1
+    return False
+
+input = sys.stdin.readline
+
+N = int(input())
+storage = list(map(int, input().split()))
+storage.sort()
+M = int(input())
+request = list(map(int, input().split()))
+
+for i in request:
+    if binary_search(storage, i, 0, N - 1):
+        print("yes", end = ' ')
+    else:
+        print("no", end = ' ')

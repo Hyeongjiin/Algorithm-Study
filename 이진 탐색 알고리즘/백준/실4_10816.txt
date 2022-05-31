@@ -1,0 +1,24 @@
+계수 정렬 활용
+import sys
+
+def b_search(data, target, start, end):
+    if start > end:
+        return 0
+    mid = (start + end) // 2
+    if mid == target:
+        return data[mid]
+    elif mid > target:
+        return b_search(data, target, start, mid - 1)
+    else:
+        return b_search(data, target, mid + 1, end)
+        
+input = sys.stdin.readline
+N = int(input())
+data = list(map(int, input().split()))
+nums = [0] * 20000001
+for i in data:
+    nums[i + 10000000] += 1
+M = int(input())
+sample = list(map(int, input().split()))
+for i in sample:
+    print(b_search(nums, i + 10000000, 0, 20000000), end=' ')

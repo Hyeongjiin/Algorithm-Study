@@ -1,0 +1,24 @@
+##### 시간 복잡도는 O(logN) - 실행할 때 마다 반씩 줄어듬 - log의 밑은 2임 ##### 
+import sys
+
+def binary_search(arr, target, start, end):
+    if start > end:
+        return None
+    mid = (start + end) // 2
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] > target:
+        return binary_search(arr, target, start, mid - 1)
+    else:
+        return binary_search(arr, target, mid + 1, end)
+      
+input = sys.stdin.readline
+
+n, target = list(map(int, input().split()))
+array = list(map(int, input().split()))
+
+result = binary_search(array, target, 0, n - 1)
+if result == None:
+    print("원소가 존재하지 않습니다.")
+else:
+    print(result + 1)
