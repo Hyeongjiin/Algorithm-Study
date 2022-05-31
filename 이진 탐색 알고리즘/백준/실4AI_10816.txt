@@ -22,3 +22,21 @@ M = int(input())
 sample = list(map(int, input().split()))
 for i in sample:
     print(b_search(nums, i + 10000000, 0, 20000000), end=' ')
+
+################################
+
+딕셔너리 활용
+import sys
+
+input = sys.stdin.readline
+N = int(input())
+data = list(map(int, input().split()))
+dic_data = {}
+for i in data:
+    if i in dic_data:
+        dic_data[i] += 1
+    else:
+        dic_data[i] = 1
+M = int(input())
+sample = list(map(int, input().split()))
+print(' '.join(str(dic_data[n]) if n in dic_data else '0' for n in sample))
