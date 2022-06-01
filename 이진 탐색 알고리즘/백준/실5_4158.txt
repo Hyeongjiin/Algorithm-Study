@@ -1,0 +1,54 @@
+딕셔너리 활용 
+import sys
+
+input = sys.stdin.readline
+
+while True:
+    N, M = map(int, input().split())
+    if N ==  0 and  M == 0:
+        break
+    data_N = []
+    for i in range(N):
+        data_N.append(int(input()))
+    data_M = {}
+    for i in range(M):
+        num = int(input())
+        if num not in data_M:
+            data_M[num] = 1
+    count = 0
+    for i in data_N:
+        if i in data_M:
+            count += 1
+    print(count)
+###########################
+이진탐색 활용 
+import sys
+
+def b_search(data, target, start, end):
+    while start <= end:
+        mid = (start + end) // 2
+        if data[mid] == target:
+            return True
+        elif data[mid] > target:
+            end = mid - 1
+        else:
+            start = mid + 1
+    return False
+
+input = sys.stdin.readline
+
+while True:
+    N, M = map(int, input().split())
+    if N ==  0 and  M == 0:
+        break
+    data_N = []
+    for i in range(N):
+        data_N.append(int(input()))
+    data_M = []
+    for i in range(N):
+        data_M.append(int(input()))
+    count = 0
+    for i in data_N:
+        if b_search(data_M, i, 0, M - 1):
+            count += 1
+    print(count)

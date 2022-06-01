@@ -40,3 +40,9 @@ for i in data:
 M = int(input())
 sample = list(map(int, input().split()))
 print(' '.join(str(dic_data[n]) if n in dic_data else '0' for n in sample))
+or
+for i in sample:
+    if i in dic_data:
+        print(dic_data[i], end = ' ')
+    else:
+        print(0, end = ' ')

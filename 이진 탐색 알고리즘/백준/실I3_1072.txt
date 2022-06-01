@@ -1,0 +1,45 @@
+부동소수점의 계산은 부정확할 수 있다. 
+Z = int(100 * Y / X ) 통
+Z = int(Y / X * 100) 불통
+import sys
+
+def b_search(X, Y, Z, start, end):
+    last = 0
+    while start <= end:
+        mid = (start + end) // 2
+        rate = int(100 * (Y + mid) / (X + mid))
+        if rate == Z:
+            start = mid + 1
+        else:
+            end = mid - 1
+            last = mid
+    return last
+
+input = sys.stdin.readline
+X, Y = map(int, input().split())
+Z = int(100 * Y / X )
+result = b_search(X, Y, Z, 0, 2000000000)
+if result == 0:
+    print(-1)
+else:
+    print(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
