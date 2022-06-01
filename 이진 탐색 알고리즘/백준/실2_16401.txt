@@ -1,0 +1,34 @@
+import sys
+def b_search(data, head, start, end):
+    result = 0
+    while start <= end:
+        count = 0
+        mid = (start + end) // 2
+        for i in data:
+            count += i // mid
+            if count >= M:
+                break
+        if count >= M:
+            start = mid + 1
+            result = mid
+        else:
+            end = mid - 1
+    return result
+      
+input = sys.stdin.readline
+M, N = map(int, input().split())
+data = list(map(int, input().split()))
+end = max(data) * 2
+start = 1
+length = b_search(data, M, start, end)
+print(length)
+
+
+
+
+
+
+
+
+
+

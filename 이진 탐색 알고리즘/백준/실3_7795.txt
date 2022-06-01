@@ -1,0 +1,35 @@
+import sys
+
+def b_search(B, target, start, end):
+    result = -1
+    while start <= end:
+        mid = (start + end) // 2
+        if target > B[mid]:
+            result = mid
+            start = mid + 1
+        else:
+            end = mid - 1
+    return result            
+
+input = sys.stdin.readline
+
+T = int(input())
+for i in range(T):
+    N, M = map(int, input().split())
+    A = list(map(int, input().split()))
+    A.sort()
+    B = list(map(int, input().split()))
+    B.sort()
+    result = 0
+    for i in A:
+        index = b_search(B, i, 0,  M - 1)
+        if index >= 0:
+            result += index + 1
+    print(result)
+
+
+
+
+
+
+

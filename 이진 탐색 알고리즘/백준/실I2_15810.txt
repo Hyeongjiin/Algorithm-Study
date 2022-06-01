@@ -1,0 +1,36 @@
+import sys
+
+def b_search(data, goal, start, end):
+    result = 0
+    while start <= end:
+        count = 0
+        mid = (start + end) // 2
+        for i in data:
+            count += mid // i
+        if count >= goal:
+            result = mid
+            end = mid - 1
+        else:
+            start = mid + 1
+    return result
+
+input = sys.stdin.readline
+N, M = map(int, input().split())
+data = list(map(int, input().split()))
+end = min(data) * M * 2
+result = b_search(data, M, 0, end)
+print(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+import sys
+
+def b_search(data,budget, start, end):
+    result = 0
+    while start <= end:
+        total = 0
+        mid = (start + end) // 2
+        for i in data:
+            if i > mid:
+                total += mid
+            else:
+                total += i
+        if total == budget:
+            result = mid
+            return result
+        elif total > budget:
+            end = mid - 1
+        else:
+            start = mid + 1
+            result = mid
+    return result
+        
+
+input = sys.stdin.readline
+
+N = int(input())
+data = list(map(int, input().split()))
+M = int(input())
+sum = 0
+maxi = 0
+for i in data:
+    sum += i
+    if maxi < i:
+        maxi = i
+if M >= sum:
+    print(maxi)
+else:
+  up = b_search(data, M, 0, 2 * M)
+  print(up)
