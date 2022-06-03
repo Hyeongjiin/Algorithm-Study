@@ -1,0 +1,17 @@
+A = list(input())
+B = list(input())
+C = []
+cnt = [3, 2, 1, 2, 3, 3, 2, 3, 3, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 2, 1 ]
+minus = ord('A') - 1
+length = len(A)
+for i in range(length):
+    C.append(cnt[ord(A[i]) - minus - 1])
+    C.append(cnt[ord(B[i]) - minus - 1])
+length *= 2
+times = length
+for i in range(times - 2):
+    for j in range(length - 1):
+        C[j] = (C[j] + C[j + 1]) % 10
+    length -= 1
+result = 10 * C[0] + C[1]
+print("%02d" %result)
