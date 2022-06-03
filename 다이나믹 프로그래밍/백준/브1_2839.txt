@@ -1,0 +1,13 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+sugar = [3, 5]
+cnt = [5001] * (N + 1)
+cnt[0] = 0
+for i in range(2):
+    for j in range(sugar[i], N + 1):
+        cnt[j] = min(cnt[j], cnt[j - sugar[i]] + 1)
+if cnt[N] == 5001:
+    print(-1)
+else:
+    print(cnt[N])

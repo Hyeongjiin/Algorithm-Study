@@ -1,0 +1,13 @@
+A = list(input())
+B = list(input())
+C = []
+
+for i in range(8):
+    C.append(A[i])
+    C.append(B[i])
+cnt_C = 16
+for j in range(14):
+    for i in range(cnt_C - 1):
+        C[i] = str((int(C[i]) + int(C[i + 1])) % 10)
+    cnt_C -= 1
+print(C[0]+C[1])
