@@ -1,0 +1,6 @@
+N, M = map(int, input().split())
+data = [0] * (M + 1)
+data[1] = N
+for i in range(2, M + 1):
+    data[i] = data[i - 1] * (N - (i - 1)) // i
+print(data[M])

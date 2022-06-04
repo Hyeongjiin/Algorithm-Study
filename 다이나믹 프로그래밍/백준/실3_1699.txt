@@ -1,0 +1,12 @@
+import math
+N = int(input())
+end = int(math.sqrt(N))
+data = [100001] * (N + 1)
+data[0] = 0
+for i in range(end, 0, -1):
+    for j in range(0, N + 1):
+        num = (i ** 2)
+        if num + j > N:
+            break
+        data[num + j] = min(data[num + j], data[j] + 1)
+print(data[N])
