@@ -1,0 +1,22 @@
+import sys
+input = sys.stdin.readline
+One = [0] * 100001
+Two = [0] * 100001
+Three = [0] * 100001
+One[1]= 1
+Two[1] = 0
+Three[1] = 0
+One[2]= 0
+Two[2] = 1
+Three[2] = 0
+One[3]= 1
+Two[3] = 1
+Three[3] = 1
+for i in range(4, 100001):
+    One[i] = (Two[i - 1] + Three[i - 1]) % 1000000009
+    Two[i] = (One[i - 2] + Three[i - 2]) % 1000000009
+    Three[i] = (One[i - 3] + Two[i - 3]) % 1000000009
+T = int(input())
+for i in range(T):
+    N = int(input())
+    print((One[N] + Two[N] + Three[N]) % 1000000009)
