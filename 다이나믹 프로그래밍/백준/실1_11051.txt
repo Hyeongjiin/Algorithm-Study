@@ -1,0 +1,9 @@
+N, K = map(int, input().split())
+if K == 0:
+    print(1)
+else:
+    data = [0] * (K + 1)
+    data[1] = N  
+    for i in range(2, K + 1):
+        data[i] = data[i - 1] * (N - (i - 1)) // i
+    print((data[K]) % 10007)

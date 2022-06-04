@@ -1,0 +1,20 @@
+import sys
+input = sys.stdin.readline
+N, K = map(int, input().split())
+coin = []
+for i in range(N):
+    coin.append(int(input()))
+coin = list(set(coin))
+coin.sort()
+length = len(coin)
+data = [10001] * 10001
+data[0] = 0
+for i in range(length):
+    if coin[i] > K:
+        break
+    for j in range(i, K + 1):
+        data[j] = min(data[j], data[j - coin[i]] + 1)
+if data[K] == 10001:
+    print(-1)
+else:
+    print(data[K])

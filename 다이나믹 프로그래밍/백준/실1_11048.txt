@@ -1,0 +1,19 @@
+import sys
+input = sys.stdin.readline
+N, M = map(int, input().split())
+data = []
+for i in range(N):
+    data.append(list(map(int, input().split())))
+total = [[0] * M for _ in range(N)]
+total[0][0] = data[0][0]
+for i in range(N):
+    for j in range(M):
+        if i == 0 and j == 0:
+            continue
+        if i - 1 >= 0:
+            total[i][j] = max(total[i][j], data[i][j] + total[i - 1][j])
+        if j - 1 >= 0:
+            total[i][j] = max(total[i][j], data[i][j] + total[i][j - 1])
+        if i - 1 >= 0 and j - 1 >= 0:
+            total[i][j] = max(total[i][j], data[i][j] + total[i - 1][j - 1])
+print(total[N - 1][M - 1])
