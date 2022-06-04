@@ -1,0 +1,16 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+T = [0]
+P = [0]
+for i in range(N):
+    D, M = map(int, input().split())
+    T.append(D)
+    P.append(M)
+maxi = [0] * (N + 2)
+for i in range(1, N + 1):
+    if i + T[i] <= N + 1:
+        maxi[i + T[i]] = max(maxi[i + T[i]], maxi[i] + P[i])
+        for j in range(i + T[i] + 1, N + 1):
+            maxi[j] = max(maxi[i + T[i]], maxi[j])
+print(max(maxi))
