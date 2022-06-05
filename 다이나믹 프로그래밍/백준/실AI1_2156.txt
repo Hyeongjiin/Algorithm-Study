@@ -1,0 +1,15 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+wine = []
+for i in range(N): 
+    wine.append(int(input()))
+if N == 1:
+    print(wine[0])
+else:
+    total = [0] * N
+    total[0] = wine[0]
+    total[1] = wine[0] + wine[1]
+    for i in range(2, N):
+        total[i] = max(total[i - 2] + wine[i], total[i - 3] + wine[i - 1] + wine[i], total[i - 1])
+    print(max(total[N - 1], total[N - 2]))
