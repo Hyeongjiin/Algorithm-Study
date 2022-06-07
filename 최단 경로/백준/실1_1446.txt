@@ -1,0 +1,46 @@
+import heapq
+import sys
+
+INF = int(1e9)
+input = sys.stdin.readline
+
+N, D = map(int, input().split())
+graph = [[] for _ in range(D + 1)]
+distance = [INF] * (D + 1)
+road = [0, D]
+
+for i in range(N):
+    node, heading, fee = map(int, input().split())
+    if heading > D:
+        continue
+    road.append(node)
+    road.append(heading)
+    graph[node].append((heading, fee))
+
+road = list(set(road))
+road.sort()
+for i in range(len(road) - 1):
+    node = road[i]
+    heading = road[i + 1]
+    fee = heading - node
+    graph[node].append((heading, fee))
+
+print(graph)
+
+def dijkstra(start):
+    q = []
+    heapq.heappush(q, (0, start))
+    distance[start] = 0
+    while q:
+        dist, now = heapq.heappop(q)
+        if distance[now] < dist:
+            continue
+        for i in graph[now]:
+            cost = dist + i[1]
+            if cost < distance[i[0]]:
+                distance[i[0]] = cost
+                heapq.heappush(q, (cost, i[0]))
+
+dijkstra(0)
+
+print(distance[D])
