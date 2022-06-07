@@ -1,0 +1,42 @@
+import sys
+
+INF = int(1e9)
+input = sys.stdin.readline
+
+N = int(input())
+graph = [[INF] * (N + 1) for _ in range(N + 1)]
+for i in range(1, N + 1):
+    for j in range(1, N + 1):
+        if i == j:
+            graph[i][j] = 0
+
+while True:
+    node, heading = map(int, input().split())
+    if node == -1 and heading == -1:
+        break
+    fee = 1
+    graph[node][heading] = 1
+    graph[heading][node] = 1
+  
+for mid in range(1, N + 1):
+    for node in range(1, N + 1):
+        for heading in range(1, N + 1):
+            graph[node][heading] = min(graph[node][heading], graph[node][mid] + graph[mid][heading])
+candi = []
+score = 0
+min = INF
+for i in range(1, N + 1):
+    count = 0
+    for j in range(1, N + 1):
+        count = max(count, graph[i][j])
+    if count < min:
+        min = count
+        candi = []
+        candi.append(i)
+        score = min
+    elif count == min:
+        candi.append(i)
+
+print(score, len(candi))
+for i in candi:
+    print(i, end = " ")

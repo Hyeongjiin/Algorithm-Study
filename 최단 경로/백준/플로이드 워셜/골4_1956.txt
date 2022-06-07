@@ -1,0 +1,27 @@
+import sys
+INF = int(1e9)
+input = sys.stdin.readline
+
+V, E = map(int, input().split())
+graph = [[INF] * (V + 1) for _ in range(V + 1)]
+for i in range(E):
+    node, heading, fee = map(int, input().split())
+    graph[node][heading] = fee
+
+for mid in range(1, V + 1):
+    for node in range(1, V + 1):
+        for heading in range(1, V + 1):
+            graph[node][heading] = min(graph[node][heading], graph[node][mid] + graph[mid][heading])
+
+mini = INF
+for node in range(1, V + 1):
+    for heading in range(1, V + 1):
+        if node == heading:
+            if graph[node][heading] < mini:
+                mini = graph[node][heading]
+            else:
+                continue
+if mini == INF:
+    print(-1)
+else:
+    print(mini)
