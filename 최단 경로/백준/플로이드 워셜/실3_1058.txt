@@ -1,0 +1,38 @@
+import sys
+
+INF = int(1e9)
+input = sys.stdin.readline
+
+N = int(input())
+Friend = []
+for i in range(N):
+    Friend.append(list(input().rstrip()))
+  
+distance = [[INF] * (N + 1) for _ in range(N + 1)]
+
+for i in range(N):
+    for j in range(N):
+        if i == j:
+            distance[i + 1][j + 1] = 0
+        elif Friend[i][j] == 'Y':
+            distance[i + 1][j + 1] = 1
+
+for node in range(1, N + 1):
+    for heading in range(1, N + 1):
+        if node == heading:
+            distance[node][heading] = 0
+
+for node in range(1, N + 1):
+    for mid in range(1, N + 1):
+        for heading in range(1, N + 1):
+            distance[node][heading] = min(distance[node][heading], distance[node][mid] + distance[mid][heading])
+
+maxi = 0
+for i in range(1, N + 1):
+    count = 0
+    for j in range(1, N + 1):
+        if 1 <= distance[i][j] <= 2:
+            count += 1
+    if count > maxi:
+        maxi = count
+print(maxi)

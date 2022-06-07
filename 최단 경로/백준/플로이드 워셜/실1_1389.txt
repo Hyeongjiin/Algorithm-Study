@@ -1,0 +1,34 @@
+import sys
+
+INF = int(1e9)
+input = sys.stdin.readline
+
+N, M = map(int, input().split())
+graph = [[INF] * (N + 1) for _ in range(N + 1)]
+
+for node in range(1, N + 1):
+    for heading in range(1, N + 1):
+        if node == heading:
+            graph[node][heading] = 0
+
+for i in range(M):
+    node, heading = map(int, input().split())
+    graph[node][heading] = 1
+    graph[heading][node] = 1
+
+for mid in range(1, N + 1):
+    for node in range(1, N + 1):
+        for heading in range(1, N + 1):
+            graph[node][heading] = min(graph[node][heading], graph[node][mid] + graph[mid][heading])
+
+mini = INF
+index = 0
+for i in range(1, N + 1):
+    count = 0
+    for j in range(1, N + 1):
+        count += graph[i][j]
+    if count < mini:
+        mini = count
+        index = i
+
+print(index)
