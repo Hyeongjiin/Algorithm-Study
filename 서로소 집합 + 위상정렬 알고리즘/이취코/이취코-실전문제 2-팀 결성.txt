@@ -1,0 +1,32 @@
+import sys
+input = sys.stdin.readline
+
+N, M = map(int, input().split())
+parents = [0] * (N + 1)
+for i in range(1, N + 1):
+    parents[i] = i
+
+def find_parent(parents, index):
+    if parents[index] != index:
+        parents[index] = find_parent(parents, parents[index])
+    return parents[index]
+
+def union_parent(parents, F, S):
+    F = find_parent(parents, F)
+    S = find_parent(parents, S)
+    if F < S:
+        parents[S] = F
+    else:
+        parents[F] = S
+
+for i in range(M):
+    kind, F, S = map(int, input().split())
+    if kind == 0:
+        union_parent(parents, F, S)
+    elif kind == 1:
+        F = find_parent(parents, F)
+        S = find_parent(parents, S)
+        if F == S:
+            print("YES")
+        else:
+            print("NO")
