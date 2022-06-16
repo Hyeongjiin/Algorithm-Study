@@ -1,0 +1,33 @@
+from collections import deque
+import sys
+input = sys.stdin.readline
+
+def topology(result):
+    q = deque()
+    for i in range(1, N + 1):
+        if indegree[i] == 0:
+            q.append(i)
+    while q:
+        now = q.popleft()
+        for i in graph[now]:
+            result[i - 1] = max(result[i - 1], result[now - 1] + time[i - 1])
+            indegree[i] -= 1
+            if indegree[i] == 0:
+                q.append(i)
+          
+T = int(input())
+for i in range(T):
+    N, K = map(int, input().split())
+    graph = [[] for _ in range(N + 1)]
+    indegree = [0] * (N + 1)
+    time = list(map(int, input().split()))
+    for i in range(K):
+        node, heading = map(int, input().split())
+        graph[node].append(heading)
+        indegree[heading] += 1
+    goal = int(input())
+    result = [0] * N
+    for i in range(N):
+        result[i] = time[i]
+    topology(result)
+    print(result[goal - 1])

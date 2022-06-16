@@ -1,0 +1,22 @@
+N, M = map(int, input().split())
+data = list(map(int, input().split()))
+weight = [0] * 11
+for i in data:
+    weight[i] += 1
+
+def combination(num):
+    result = 0
+    if num <= 1:
+        return 0
+    else:
+        result = num * (num - 1) / 2
+    return int(result)
+
+total = combination(N)
+for i in range(1, 11):
+    if weight[i] == 0:
+        continue
+    else:
+        total -= combination(weight[i])
+
+print(total)

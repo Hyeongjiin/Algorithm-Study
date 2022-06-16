@@ -1,0 +1,63 @@
+정확도만 통과 / 효율성 실패 
+def solution(food_times, k):
+    length = len(food_times)
+    remember = 0
+    count = 0
+    while k > 0:
+        for i in range(length):
+            if food_times[i] == 0:
+                continue
+            else:
+                food_times[i] -= 1
+                if food_times[i] == 0:
+                    count += 1
+                if count == length:
+                  return -1 
+                k -= 1
+                remember = i
+                if k == 0:
+                    break
+
+    remember += 1
+    answer = 0
+    for i in range(length + 2):
+        if remember > length - 1:
+            remember = 0
+        if food_times[remember] == 0:
+            remember += 1
+        else:
+            answer = remember
+            break
+    return answer + 1
+
+food_times = list(map(int, input().split()))
+k = int(input())
+print(solution(food_times, k))
+##########################################################
+이취코 답안 
+import heapq
+
+def solution(food_times, k):
+    if sum(food_times) <= k:
+        return -1 
+
+    q = []
+    for i in range(len(food_times)):
+        heapq.heappush(q, (food_times[i], i + 1))
+
+    sum_value = 0
+    previous = 0
+    length = len(food_times)
+
+    while sum_value + ((q[0][0] - previous) * length) <= k:
+        now = heapq.heappop(q)[0]
+        sum_value += (now - previous) * length
+        length -= 1
+        previous = now
+
+    result = sorted(q, key = lambda x : x[1])
+    return result[(k - sum_value) % length][1]
+
+food_times = list(map(int, input().split()))
+k = int(input())
+print(solution(food_times, k))

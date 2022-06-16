@@ -1,0 +1,19 @@
+N = int(input())
+place = []
+for i in range(N):
+    place.append(list(map(int, input().split())))
+result = [[0] * N for _ in range(N)]
+result[0][0] = 1
+
+for i in range(N):
+    for j in range(N):
+        if i == N - 1 and j == N - 1:
+            break
+        if result[i][j] == 0:
+            continue
+        if i + place[i][j] <= N - 1:
+            result[i + place[i][j]][j] += result[i][j]
+        if j + place[i][j] <= N - 1:
+            result[i][j + place[i][j]] += result[i][j]
+
+print(result[N - 1][N - 1])

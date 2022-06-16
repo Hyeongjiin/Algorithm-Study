@@ -1,0 +1,26 @@
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+data = list(map(int, input().split()))
+
+left = [1] * N
+right = [1] * N
+
+for i in range(N):
+    for j in range(i):
+        if data[j] < data[i]:
+            left[i] = max(left[i], left[j] + 1)
+
+for i in range(N - 1, -1, -1):
+    for j in range(N - 1, i, -1):
+        if data[i] > data[j]:
+            right[i] = max(right[i], right[j] + 1)
+
+maxi = 0
+for i in range(N):
+    result = left[i] + right[i]
+    if result > maxi:
+        maxi = result
+
+print(maxi - 1)

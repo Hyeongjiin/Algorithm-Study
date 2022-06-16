@@ -1,0 +1,89 @@
+n, m = map(int, input().split())
+
+d = [[0] * m for _ in range(n)]
+x, y, direction = map(int, input().split())
+d[x][y] = 1
+
+array = []
+for i in range(n):
+    array.append(list(map(int, input().split())))
+# 북, 동, 남, 서 방향 정의 
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
+
+def turn_left():
+    global direction
+    direction -= 1
+    if direction == -1:
+        direction = 3
+
+count = 1
+turn_time = 0
+while True:
+    turn_left()
+    nx = x + dx[direction]
+    ny = y + dx[direction]
+    if d[nx][ny] == 0 and array[nx][ny] == 0:
+        d[nx][ny] = 1
+        x = nx
+        y = ny 
+        count += 1
+        turn_time = 0
+        continue
+    else:
+        turn_time += 1
+    if turn_time == 4:
+        nx = x - dx[direction]
+        ny = y - dy[direction]
+        if array[nx][ny] == 0:
+            x = nx
+            y = ny
+        else:
+            break
+        turn_time = 0
+      
+print(count)
+
+##################################################
+
+N, M = map(int, input().split())
+x, y, w = map(int, input().split())
+place = []
+been = [[False] * M for _ in range(N)]
+for i in range(N):
+    place.append(list(map(int, input().split())))
+moves = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+been[y][x] = True
+count = 1
+
+def turn_left(w):
+    w -= 1
+    if w == -1:
+        w = 3
+    return w
+
+while True:
+    flag = 0
+    for i in range(4):
+        w = turn_left(w)
+        nx = x + moves[w][0]
+        ny = y + moves[w][1]
+        if nx < 0 or ny < 0 or nx > M -1 or ny > N - 1:
+            continue
+        if place[ny][nx] == 0 and been[ny][nx] == False:
+            x = nx
+            y = ny
+            been[y][x] = True
+            count += 1
+            flag = 1
+        else:
+            continue
+    if flag == 0:
+        x -= moves[w][0]
+        y -= moves[w][1]
+        if x < 0 or y < 0 or x > M -1 or y > N - 1:
+            break
+        if place[y][x] == 1:
+            break
+
+print(count)

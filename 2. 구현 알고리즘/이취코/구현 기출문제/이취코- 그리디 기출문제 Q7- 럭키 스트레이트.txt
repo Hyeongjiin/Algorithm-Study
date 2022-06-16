@@ -1,0 +1,13 @@
+data = list(map(int, input()))
+length = len(data)
+result = 0
+for i in range(length):
+    if i < length / 2:
+        result += data[i]
+    else:
+        result -= data[i]
+
+if result == 0:
+    print("LUCKY")
+else:
+    print("READY")

@@ -1,0 +1,20 @@
+N = int(input())
+dice = list(map(int, input().split()))
+sum_1 = min(dice)
+sum_2 = int(1e9)
+for i in range(6):
+    for j in range(i + 1, 6):
+        if i + j == 5:
+            continue
+        sum_2 = min(sum_2, dice[i] + dice[j])
+sum_3 = int(1e9)
+sum_3 = min(dice[0] + dice[1] + dice[2], dice[0] + dice[2] + dice[4], dice[0] + dice[4] + dice[3], dice[0] + dice[3] + dice[1], dice[5] + dice[1] + dice[3], dice[5] + dice[3] + dice[4], dice[5] + dice[4] + dice[2], dice[5] + dice[2] + dice[1])
+sum_5 = sum(dice) - max(dice)
+
+result = 0
+if N == 1:
+    print(sum_5)
+else:
+    result += sum_3 * 4 + sum_2 * (4 * N - 8) + sum_1 * (N ** 2 - 4 * N + 4)
+    result += (sum_2 * 4 + sum_1 * (4 * N - 8)) * (N - 1)
+    print(result)

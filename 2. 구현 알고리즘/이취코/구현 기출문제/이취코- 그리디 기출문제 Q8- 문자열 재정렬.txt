@@ -1,0 +1,10 @@
+data = list(input())
+length = len(data)
+result = 0
+data.sort()
+for i in range(length):
+    if "A" <= data[i] <= "Z":
+        print(data[i], end = "")
+    else:
+        result += int(data[i])
+print(result, end = "")

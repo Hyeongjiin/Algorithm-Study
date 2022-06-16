@@ -1,0 +1,52 @@
+# BFS와 DFS모두 구현 
+from collections import deque
+import sys
+sys.setrecursionlimit(10**6)
+
+def bfs(y, x, space):
+    if space[y][x] == 0:
+        q = deque()
+        q.append((y, x))
+        while q:
+            y, x = q.popleft()
+            if y < 0 or x < 0 or y > N - 1 or x > M - 1:
+                continue
+            if space[y][x] == 0:
+                space[y][x] = -1              
+                q.append((y + 1, x))
+                q.append((y - 1, x))
+                q.append((y, x + 1))
+                q.append((y, x - 1))
+        return True
+    return False
+
+def dfs(y, x, space):
+    if y < 0 or x < 0 or y > N - 1 or x > M - 1:
+        return False
+    if space[y][x] == 0:
+        space[y][x] = -1
+        dfs(y + 1, x, space)
+        dfs(y - 1, x, space)
+        dfs(y, x + 1, space)
+        dfs(y, x - 1, space)
+        return True
+    return False
+
+
+N, M = map(int, input().split())
+space = []
+for i in range(N):
+    space.append(list(map(int, input())))
+count = 0
+for i in range(N):
+    for j in range(M):
+        if bfs(i, j, space):
+            count += 1
+print(count)
+# space도 초기화 필요
+count = 0
+for i in range(N):
+    for j in range(M):
+        if dfs(i, j, space):
+            count += 1
+print(count)

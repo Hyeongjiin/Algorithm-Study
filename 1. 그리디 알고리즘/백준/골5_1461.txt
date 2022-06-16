@@ -1,0 +1,42 @@
+N, M = map(int, input().split())
+books = list(map(int, input().split()))
+books.sort()
+
+left = []
+count_L = 0
+right = []
+count_R = 0
+count = M
+for i in range(N):
+    if books[i] < 0:
+        if count == M:
+            left.append(books[i])
+            count_L += 1
+            count = 1
+        else:
+            count += 1
+    else:
+        break
+count = M
+for i in range(N - 1, -1, -1):
+    if books[i] > 0:
+        if count == M:
+            right.append(books[i])
+            count_R += 1
+            count = 1
+        else:
+            count += 1
+    else:
+       break
+
+result = 0
+if count_L == 0:
+    result = sum(right) * 2 - right[0]
+elif count_R == 0:
+    result = -sum(left) * 2 + left[0]
+else:
+    if -left[0] > right[0]:
+        result = -sum(left) * 2 + left[0] + sum(right) * 2
+    else:
+        result = -sum(left) * 2 + sum(right) * 2 - right[0]
+print(result)

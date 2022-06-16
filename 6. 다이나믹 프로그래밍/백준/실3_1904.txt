@@ -1,0 +1,15 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+data = []
+for i in range(N):
+    F, S = map(int, input().split())
+    data.append((F, S))
+data = sorted(data, key = lambda x:x[0])
+dp = [1] * N
+for i in range(N):
+    for j in range(i):
+        if data[i][1] > data[j][1]:
+            dp[i] = max(dp[i], dp[j] + 1)
+result = N - max(dp)
+print(result)

@@ -1,0 +1,28 @@
+import sys
+sys.setrecursionlimit(10 **9)
+N, M = map(int, input().split())
+arr = []
+visited = [[False for _ in range(M)] for __ in range(N)]
+dp = [[0 for _ in range(M)] for __ in range(N)]
+d = [[0, -1], [-1, 0], [1, 0], [0, 1]]
+for i in range(N):
+    arr.append(list(map(int, input().split())))
+
+
+def dfs(y, x):
+    if visited[y][x] ==True:
+        return dp[y][x]
+    if y == N-1 and x == M-1 :
+        return 1
+    for i in d:
+        dy = y + i[0]
+        dx = x + i[1]
+        if 0 <= dx and dx < M and 0 <= dy and dy < N:
+            if arr[dy][dx] < arr[y][x]:
+                # print("y,x:",y,x)
+                # print("dy,dx:",dy,dx)
+                dp[y][x] += dfs(dy, dx)
+    visited[y][x] = True
+    return dp[y][x]
+
+print(dfs(0, 0))

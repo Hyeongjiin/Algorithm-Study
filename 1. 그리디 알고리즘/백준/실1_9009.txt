@@ -1,0 +1,20 @@
+data = [0] * 46
+data[1] = 1
+for i in range(2, 46):
+    data[i] = data[i - 1] + data[i - 2]
+  
+T = int(input())
+record = [[] for _ in range(T)]
+for i in range(T):
+    N = int(input())
+    for j in range(45, -1, -1):
+        if N - data[j] >= 0:
+            N -= data[j]
+            record[i].append(data[j])
+            if N == 0:
+                break
+
+for i in record:
+    for j in range(len(i) - 1, -1, -1):
+        print(i[j], end = " ")
+    print()
