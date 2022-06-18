@@ -1,0 +1,24 @@
+N = int(input())
+parent = list(map(int, input().split()))
+delete = int(input())
+indegree = [0] * N
+parent[delete] = -2
+def find_parent(parent, x, delete):
+    if parent[x] == -2:
+        return parent[x]
+    if parent[x] == delete:
+        parent[x] = -2
+        return parent[x]
+    if parent[x] != -1:
+        indegree[parent[x]] += 1
+        parent[x] = find_parent(parent, parent[x], delete)
+    return parent[x]
+
+for i in range(N):
+    find_parent(parent, i, delete)
+
+count = 0
+for i in range(N):
+    if parent[i] != -2 and indegree[i] == 0:
+        count += 1
+print(count)

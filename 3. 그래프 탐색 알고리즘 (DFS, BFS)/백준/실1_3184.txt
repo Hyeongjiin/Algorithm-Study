@@ -1,0 +1,50 @@
+from collections import deque
+import sys
+input = sys.stdin.readline
+
+def bfs(y, x):
+    lamb = 0
+    wolve = 0
+    q = deque()
+    q.append((y, x))
+    if space[y][x] == "o":
+        lamb += 1
+        space[y][x] = "#"
+    elif space[y][x] == "v":
+        wolve += 1
+        space[y][x] = "#"
+    while q:
+        y, x = q.popleft()
+        for move in moves:
+            ny = y + move[0]
+            nx = x + move[1]
+            if 0 <= ny <= N - 1 and 0 <= nx <= M - 1:
+                if space[ny][nx] != "#":
+                    if space[ny][nx] == "v":
+                        wolve += 1
+                    elif space[ny][nx] == "o":
+                        lamb += 1
+                    space[ny][nx] = "#" 
+                    q.append((ny, nx))
+    result = [lamb, wolve]
+    return result
+        
+N, M = map(int, input().split())
+space = []
+moves = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+for i in range(N):
+    space.append(list(input().rstrip()))
+
+lambs = 0
+wolves = 0
+for i in range(N):
+    for j in range(M):
+        if space[i][j] != "#":
+            result = bfs(i, j)
+            if result[0] > result[1]:
+                lambs += result[0]
+            else:
+                wolves += result[1]
+
+print(lambs, wolves)

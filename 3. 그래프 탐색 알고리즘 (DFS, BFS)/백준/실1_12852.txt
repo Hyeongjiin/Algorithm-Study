@@ -1,0 +1,28 @@
+import sys
+input = sys.stdin.readline
+N = int(input())
+data = [0] * (N + 1)
+for i in range(2, N + 1):
+    data[i] = data[i - 1] + 1
+    if i % 2 == 0:
+        data[i] = min(data[i], data[i // 2] + 1)
+    if i % 3 == 0:
+        data[i] = min(data[i], data[i // 3] + 1)
+print(data[N])
+print(N, end = " ")
+INF = int(1e9)
+while N > 1:
+    tmp = N
+    mini = INF
+    if N % 3 == 0:
+        if data[N // 3] < mini:
+            mini = data[N // 3]
+            tmp = N // 3
+    if N % 2 == 0:
+        if data[N // 2] < mini:
+            mini = data[N // 2]
+            tmp = N // 2
+    if data[N - 1] < mini:
+        tmp = N - 1
+    N = tmp
+    print(N, end = " ")

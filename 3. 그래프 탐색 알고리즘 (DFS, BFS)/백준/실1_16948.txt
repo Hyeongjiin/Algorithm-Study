@@ -1,0 +1,26 @@
+from collections import deque
+
+N = int(input())
+r1, c1, r2, c2 = map(int, input().split())
+
+moves = [(-2, -1), (-2, 1), (0, -2), (0, 2), (2, -1), (2, 1)]
+visited = [[False] * (N + 1) for _ in range(N)]
+
+def bfs(r1, c1, r2, c2):
+    q = deque()
+    count = 0
+    q.append((r1, c1, count))
+    while q:
+        r1, c1, count = q.popleft()
+        if r1 == r2 and c1 == c2:
+            return count
+        for move in moves:
+            nr = r1 + move[0]
+            nc = c1 + move[1]
+            if (0 <= nr <= N - 1) and (0 <= nc <= N - 1):
+                if visited[nr][nc] == False:
+                    visited[nr][nc] = True
+                    q.append((nr, nc, count + 1))
+    return -1
+
+print(bfs(r1, c1, r2, c2))

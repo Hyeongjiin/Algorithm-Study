@@ -1,0 +1,60 @@
+from collections import deque
+import sys
+input = sys.stdin.readline
+INF = int(1e9)
+
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+for i in range(N - 1):
+    node, heading, fee = map(int, input().split())
+    graph[node].append((heading, fee))
+    graph[heading].append((node, fee))
+
+def bfs(start, goal):
+    q = deque()
+    q.append(start)
+    result = [INF] * (N + 1)
+    result[start] = 0
+    visited = [False] * (N + 1)
+    visited[start] = True
+    while q:
+        now = q.popleft()
+        for i in graph[now]:
+            if visited[i[0]] == False:
+                result[i[0]] = min(result[i[0]], result[now] + i[1])
+                q.append(i[0])
+                visited[i[0]] = True
+    return result[goal]
+
+for i in range(M):
+    node, heading = map(int, input().split())
+    print(bfs(node, heading))
+
+######################################################
+
+import sys
+sys.setrecursionlimit(10**6)
+input = sys.stdin.readline
+
+def dfs(start, goal, time):
+    if start == goal:
+        return time
+    for i in graph[start]:
+        if visited[i[0]] == False:
+            visited[i[0]] = True
+            result = dfs(i[0], goal, time + i[1])
+            if result:
+                return result
+
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+for i in range(N - 1):
+    node, heading, fee = map(int, input().split())
+    graph[node].append((heading, fee))
+    graph[heading].append((node, fee))
+
+for i in range(M):
+    node, heading = map(int, input().split())
+    visited = [False] * (N + 1)
+    visited[node] = True
+    print(dfs(node, heading, 0))

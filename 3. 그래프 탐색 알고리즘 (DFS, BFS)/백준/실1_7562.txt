@@ -1,0 +1,30 @@
+from collections import deque
+import sys
+input = sys.stdin.readline
+
+def bfs(ny, nx, gy, gx):
+    count = 0
+    q = deque()
+    q.append((ny, nx, count))
+    visited[ny][nx] == True
+    while q:
+        ny, nx, count = q.popleft()
+        if ny == gy and nx == gx:
+            return count
+        for move in moves:
+            next_y = ny + move[0]
+            next_x = nx + move[1]
+            if 0 <= next_y <= N - 1 and 0 <= next_x <= N - 1:
+                if visited[next_y][next_x] == False:
+                    visited[next_y][next_x] = True
+                    q.append((next_y, next_x, count + 1))
+    return -1
+        
+T = int(input())
+moves = [(2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2)]
+for i in range(T):
+    N = int(input())
+    ny, nx = map(int, input().split())
+    gy, gx = map(int, input().split())
+    visited = [[False] * N for _ in range(N)]
+    print(bfs(ny, nx, gy, gx))
