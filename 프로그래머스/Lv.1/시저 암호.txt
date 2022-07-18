@@ -1,0 +1,48 @@
+def solution(s, n):
+    answer = ''
+    length = len(s)
+    for i in range(length):
+        if ord("a") <= ord(s[i]) and ord(s[i]) <= ord("z"):
+            word = chr(ord(s[i]) + n)
+            if ord(word) > ord("z"):
+                word = chr(97 + ord(word) % ord("z") - 1)
+            answer += word
+        elif ord("A") <= ord(s[i]) and ord(s[i]) <= ord("Z"):
+            word = chr(ord(s[i]) + n)
+            if ord(word) > ord("Z"):
+                word = chr(65 + ord(word) % ord("Z") - 1)
+            answer += word
+        else:
+            answer += " "
+    return answer
+
+=============================================
+개선 1
+def solution(s, n):
+    answer = ''
+    length = len(s)
+    for i in range(length):
+        if ord("a") <= ord(s[i]) and ord(s[i]) <= ord("z"):
+            word = chr((ord(s[i]) - 97 + n) % 26 + ord("a"))
+            answer += word
+        elif ord("A") <= ord(s[i]) and ord(s[i]) <= ord("Z"):
+            word = chr((ord(s[i]) - 65 + n) % 26 + ord("A"))
+            answer += word
+        else:
+            answer += " "
+    return answer
+==============================================
+개선 2
+def solution(s, n):
+    answer = ''
+    length = len(s)
+    for i in range(length):
+        if s[i].islower():
+            word = chr((ord(s[i]) - 97 + n) % 26 + ord("a"))
+            answer += word
+        elif s[i].isupper():
+            word = chr((ord(s[i]) - 65 + n) % 26 + ord("A"))
+            answer += word
+        else:
+            answer += " "
+    return answer
