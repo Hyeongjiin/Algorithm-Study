@@ -1,0 +1,11 @@
+def solution(n):
+    answer = 0
+    data = []
+    while n > 0:
+        data.append(n % 10)
+        n //= 10
+    data.sort(reverse = True)
+    for i in range(len(data)):
+        answer *= 10
+        answer += data[i]
+    return answer

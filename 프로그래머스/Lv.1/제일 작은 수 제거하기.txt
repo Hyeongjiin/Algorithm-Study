@@ -1,0 +1,13 @@
+def solution(arr):
+    length = len(arr)
+    if length == 1:
+        arr = [-1]
+    else:
+        mini = int(1e9)
+        index = 0
+        for i in range(length):
+            if arr[i] < mini:
+                mini = arr[i]
+                index = i
+        arr.remove(arr[index])
+    return arr

@@ -1,0 +1,9 @@
+import math
+def solution(n):
+    answer = 0
+    num = int(math.sqrt(n))
+    if num ** 2 == n:
+        answer = (num + 1) ** 2
+    else:
+        answer = -1
+    return answer

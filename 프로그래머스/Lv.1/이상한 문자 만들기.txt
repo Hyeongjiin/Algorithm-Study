@@ -1,0 +1,13 @@
+def solution(s):
+    answer = ''
+    data = s.split(" ")
+    length = len(data)
+    for i in range(length):
+        for j in range(len(data[i])):
+            if j % 2 == 0:
+                answer += data[i][j].upper()
+            else:
+                answer += data[i][j].lower()
+        if i != length - 1:
+            answer += " "
+    return answer
