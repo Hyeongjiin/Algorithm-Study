@@ -1,0 +1,19 @@
+import math
+def solution(nums):
+    answer = 0
+    nums.sort()
+    maxi = nums[-1] + nums[-2] + nums[-3]
+    space = [True] * (maxi + 1)
+    for i in range(2, int(math.sqrt(maxi)) + 1):
+        if space[i] == True: 
+            j = 2
+            while j * i <= maxi:
+                space[j * i] = False
+                j += 1
+    length = len(nums)
+    for i in range(length - 2):
+        for j in range(i + 1, length - 1):
+            for k in range(j + 1, length):
+                if space[nums[i] + nums[j] + nums[k]] == True:
+                    answer += 1
+    return answer

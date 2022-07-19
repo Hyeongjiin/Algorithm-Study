@@ -1,0 +1,12 @@
+def solution(nums):
+    answer = 0
+    data = [0] * (200001)
+    for i in nums:
+        data[i] += 1
+    kind = len(nums) / 2
+    for i in data:
+        if i > 0:
+            answer += 1
+        if answer == kind:
+            break
+    return answer

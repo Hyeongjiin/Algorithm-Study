@@ -1,0 +1,17 @@
+def solution(participant, completion):
+    answer = ''
+    data = {}
+    for i in completion:
+        if i not in data:
+            data[i] = 1
+        else:
+            data[i] += 1
+    for i in participant:
+        if i in data:
+            if data[i] == 0:
+                answer += i
+            else:
+                data[i] -= 1
+        else:
+            answer += i
+    return answer

@@ -1,0 +1,21 @@
+def solution(n, lost, reserve):
+    answer = n - len(lost)
+    lost.sort()
+    reserve.sort()
+    visited_lost = [False] * (len(lost))
+    visited_reserve = [False] * (len(reserve))
+    for i in range(len(lost)):
+        for j in range(len(reserve)):
+            if lost[i] == reserve[j]:
+                visited_lost[i] = True
+                visited_reserve[j] = True
+                answer += 1
+    for i in range(len(lost)):
+        for j in range(len(reserve)):
+            if visited_lost[i] == True:
+                continue
+            if (lost[i] - 1 == reserve[j] or lost[i] + 1 == reserve[j]) and visited_reserve[j] == False:
+                reserve[j] = True
+                answer += 1
+                break
+    return answer

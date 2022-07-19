@@ -1,0 +1,23 @@
+def solution(answers):
+    answer = []
+    length = len(answers)
+    f1 = [1, 2, 3, 4, 5] * (length // 5 + 1)
+    f2 = [2, 1, 2, 3, 2, 4, 2, 5] * (length // 8 + 1)
+    f3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5] * (length // 10 + 1)
+    result = [[0, 0] for _ in range(3)]
+    for i in range(3):
+        result[i][0] = i + 1
+    for i in range(len(answers)):
+        if answers[i] == f1[i]:
+            result[0][1] += 1
+        if answers[i] == f2[i]:
+            result[1][1] += 1
+        if answers[i] == f3[i]:
+            result[2][1] += 1
+    result = sorted(result, key = lambda x: -x[1])
+    maxi = result[0][1]
+    print(result)
+    for i in range(3):
+        if result[i][1] == maxi:
+            answer.append(result[i][0])
+    return answer
