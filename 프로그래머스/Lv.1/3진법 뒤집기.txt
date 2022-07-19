@@ -1,0 +1,10 @@
+def solution(n):
+    three = ""
+    while n > 0:
+        three += str(n % 3)
+        n //= 3
+    length = len(three)
+    answer = 0
+    for i in range(length):
+        answer += int(three[i]) * (3 ** (length - 1 - i))
+    return answer
