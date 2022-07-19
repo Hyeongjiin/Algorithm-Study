@@ -1,0 +1,20 @@
+def solution(s):
+    answer = True
+    length = len(s)
+    if length != 4 and length != 6:
+        answer = False
+    for i in range(length):
+        if s[i].islower() or s[i].isupper():
+            answer = False
+    return answer
+
+==============================
+개선
+def solution(s):
+    answer = True
+    length = len(s)
+    if length != 4 and length != 6:
+        answer = False
+    if not s.isdigit():
+        answer = False
+    return answer
