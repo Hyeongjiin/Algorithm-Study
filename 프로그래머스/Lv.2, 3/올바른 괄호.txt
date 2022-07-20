@@ -1,0 +1,14 @@
+def solution(s):
+    answer = True
+    num_open = 0
+    for i in range(len(s)):
+        if s[i] == "(":
+            num_open += 1
+        else:
+            num_open -= 1
+        if num_open < 0:
+            answer = False
+            break
+    if num_open > 0:
+        answer = False
+    return answer

@@ -1,0 +1,28 @@
+from collections import deque
+def solution(maps):
+    answer = -1
+    row = len(maps)
+    column = len(maps[0])
+    q = deque()
+    y = 0
+    x = 0
+    move_y = [1, -1, 0, 0]
+    move_x = [0, 0, 1, -1]
+    count = 1
+    q.append((y, x, count))
+    maps[y][x] = 0
+    while q:
+        y, x, count = q.popleft()
+        if y == row - 1 and x == column - 1:
+            answer = count
+            break
+        for i in range(4):
+            ny = y + move_y[i]
+            nx = x + move_x[i]
+            if ny < 0 or nx < 0 or ny > row - 1 or nx > column - 1:
+                continue
+            if maps[ny][nx] == 0:
+                continue
+            maps[ny][nx] = 0
+            q.append((ny, nx, count + 1))
+    return answer

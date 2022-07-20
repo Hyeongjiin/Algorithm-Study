@@ -1,0 +1,14 @@
+def solution(s):
+    answer = ""
+    s = list(map(int, s.split()))
+    mini = s[0]
+    maxi = s[0]
+    for i in range(1, len(s)):
+        if s[i] < mini:
+            mini = s[i]
+        if s[i] > maxi:
+            maxi = s[i]
+    answer += str(mini) 
+    answer += " "
+    answer += str(maxi)
+    return answer

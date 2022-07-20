@@ -1,0 +1,9 @@
+def solution(n):
+    answer = 0
+    jump = [0] * (2001)
+    jump[1] = 1
+    jump[2] = 2
+    for i in range(3, n + 1):
+        jump[i] = (jump[i - 1] + jump[i - 2]) % 1234567
+    answer = jump[n]
+    return answer

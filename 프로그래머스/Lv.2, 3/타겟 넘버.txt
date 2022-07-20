@@ -1,0 +1,18 @@
+from collections import deque
+def solution(numbers, target):
+    answer = 0
+    q = deque()
+    length = len(numbers)
+    total = 0
+    index = 0
+    q.append((total + numbers[index], index + 1))
+    q.append((total - numbers[index], index + 1))
+    while q:
+        total, index = q.popleft()
+        if index == length:
+            if total == target:
+                answer += 1
+            continue
+        q.append((total + numbers[index], index + 1))
+        q.append((total - numbers[index], index + 1))
+    return answer

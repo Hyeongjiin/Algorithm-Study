@@ -1,0 +1,15 @@
+def solution(arr):
+    answer = 0
+    gcd = 0
+    lcm = 0
+    arr.sort()
+    for i in range(1, len(arr)):
+        mini = min(arr[i], arr[i - 1])
+        maxi = max(arr[i], arr[i - 1])
+        for j in range(1, mini + 1):
+            if mini % j == 0 and maxi % j == 0:
+                gcd = j
+        lcm = int((arr[i - 1] * arr[i]) / gcd)
+        arr[i] = lcm
+    answer = arr[-1]
+    return answer
