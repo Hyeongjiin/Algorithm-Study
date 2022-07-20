@@ -1,0 +1,30 @@
+import sys
+input = sys.stdin.readline
+
+def solution(citations):
+    answer = 0
+    citations.sort()
+    start = 0
+    end = citations[-1]
+    maxi = 0
+    while start <= end:
+        mid = (start + end) // 2
+        count = 0
+        for i in citations:
+            if i >= mid:
+                count += 1
+        if count >= mid:
+            start = mid + 1
+            if maxi < mid:
+                maxi = mid
+        else:
+            end = mid - 1
+    answer = maxi
+    return answer
+
+N = int(input())
+data = []
+for i in range(N):
+  data.append(int(input()))
+result = solution(data)
+print(result)
