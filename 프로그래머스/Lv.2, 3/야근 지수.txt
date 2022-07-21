@@ -1,0 +1,13 @@
+def solution(n, works):
+    answer = 0
+    works.sort(reverse = True)
+    while n > 0:
+        maxi = works[0]
+        for i in range(len(works)):
+            if works[i] == maxi and n > 0:
+                works[i] -= 1
+                n -= 1
+    for i in works:
+        if i > 0:
+            answer += i ** 2
+    return answer

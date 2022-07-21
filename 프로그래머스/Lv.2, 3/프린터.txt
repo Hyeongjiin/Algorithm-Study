@@ -1,0 +1,21 @@
+from collections import deque
+def solution(priorities, location):
+    answer = 0
+    result = []
+    data = deque()
+    for i in range(len(priorities)):
+        data.append((priorities[i], i))
+    priorities.sort(reverse = True)
+    priorities = deque(priorities)
+    while len(data) > 0:
+        if data[0][0] == priorities[0]:
+            priorities.popleft()
+            exit = data.popleft()
+            result.append(exit[1])
+        else:
+            data.append(data.popleft())
+    print(result)
+    for i in range(len(result)):
+        if result[i] == location:
+            answer = i + 1
+    return answer

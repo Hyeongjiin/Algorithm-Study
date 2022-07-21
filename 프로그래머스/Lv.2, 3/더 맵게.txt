@@ -1,0 +1,16 @@
+import heapq
+def solution(scoville, K):
+    answer = 0
+    food_num = len(scoville)
+    heapq.heapify(scoville)
+    while food_num > 1:
+        food1 = heapq.heappop(scoville)
+        if food1 >= K:
+            break
+        food2 = heapq.heappop(scoville)
+        scoville.append(food1 + 2 * food2)
+        food_num -= 1
+        answer += 1
+    if heapq.heappop(scoville) < K:
+        answer = -1
+    return answer

@@ -1,0 +1,28 @@
+def solution(genres, plays):
+    answer = []
+    data = {}
+    for i in range(len(plays)):
+        if genres[i] not in data:
+            data[genres[i]] = [(plays[i], i)]
+        else:
+            data[genres[i]].append((plays[i], i))
+    result = list(data.items())
+    order = []
+    count = 0
+    for i in result:
+        total = 0
+        for j in i[1]:
+            total += j[0]
+        order.append((total, count))
+        count += 1
+    order.sort(key = lambda x:-x[0])
+    for i in result:
+        i[1].sort(key = lambda x:(-x[0], x[1]))
+    for i in order:
+        num = 0
+        for j in result[i[1]][1]:
+            answer.append(j[1])
+            num += 1
+            if num == 2:
+                break
+    return answer

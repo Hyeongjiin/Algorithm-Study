@@ -1,0 +1,19 @@
+def solution(progresses, speeds):
+    answer = []
+    for i in range(len(progresses)):
+        times = (100 - progresses[i]) // speeds[i]
+        if (100 - progresses[i]) % speeds[i] > 0:
+            times += 1
+        progresses[i] = times
+    count = 1
+    maxi = progresses[0]
+    for i in range(1, len(progresses)):
+        if progresses[i] > maxi:
+            maxi = progresses[i]
+            answer.append(count)
+            count = 1
+        else:
+            count += 1
+    if count != 0:
+        answer.append(count)
+    return answer
