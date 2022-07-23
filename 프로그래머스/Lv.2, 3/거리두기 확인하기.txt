@@ -1,0 +1,64 @@
+from collections import deque
+
+def solution(places):
+    answer = []
+    move_y = [1, -1, 0, 0]
+    move_x = [0, 0, 1, -1]
+    for i in range(len(places)):
+        for j in range(5):
+            places[i][j] = list(places[i][j])
+    for i in range(len(places)):
+        mark = 0
+        flag = 0
+        for j in range(5):
+            for k in range(5):
+                if places[i][j][k] == "P":
+                    print(j, k, mark)
+                    result = bfs(j, k, places[i], move_y, move_x, str(mark))
+                    mark += 1
+                    if result == 0:
+                        flag = 1
+        if flag == 1:
+            answer.append(0)
+        else:
+            answer.append(1)  
+        for h in places[i]:
+            print(h)
+    return answer
+
+def bfs(y, x, place, move_y, move_x, mark):
+    q = deque()
+    q.append((y, x, 0, "A"))
+    while q:
+        y, x, count, direction = q.popleft()
+        print(y, x, direction)
+        if count == 2:
+            continue
+        for i in range(4):
+            if direction == "D" and i == 0:
+                continue
+            if direction == "U" and i == 1:
+                continue
+            if direction == "L" and i == 2:
+                continue
+            if direction == "R" and i == 3:
+                continue
+            ny = y + move_y[i]
+            nx = x + move_x[i]
+            if ny < 0 or nx < 0 or ny > 4 or nx > 4:
+                continue
+            elif place[ny][nx] == "X":
+                continue
+            elif place[ny][nx] == "P":
+                return 0
+            else:
+                place[ny][nx] = mark
+                if i == 0:
+                    q.append((ny, nx, count + 1, "U"))
+                elif i == 1:
+                    q.append((ny, nx, count + 1, "D"))
+                elif i == 2:
+                    q.append((ny, nx, count + 1, "R"))
+                elif i == 3:
+                    q.append((ny, nx, count + 1, "L"))
+    return 1
