@@ -1,0 +1,48 @@
+from collections import deque
+import heapq
+def solution(jobs):
+    answer = 0
+    total_work = len(jobs)
+    work_done = 0
+    jobs.sort(key = lambda x:(x[0], x[1]))
+    jobs = deque(jobs)
+    work_wait = []
+    work_wait_num = 0
+    work_time = 0
+    current_time = jobs[0][0] + jobs[0][1]
+    work_time = jobs[0][1]
+    work_done += 1
+    jobs.popleft()
+    count = 0
+    for i in jobs:
+        if i[0] <= current_time:
+            heapq.heappush(work_wait, (i[1], i[0]))
+            work_wait_num += 1
+            count += 1
+    for i in range(count):
+        jobs.popleft()
+    while work_done < total_work:
+        if work_wait_num > 0:
+            need, wait = heapq.heappop(work_wait)
+            if wait <= current_time:
+                work_time += (current_time - wait) + need
+                current_time += need
+            else:
+                work_time += need
+                current_time = wait + need
+            work_wait_num -= 1
+            work_done += 1
+        else:
+            heapq.heappush(work_wait, (jobs[0][1], jobs[0][0]))
+            jobs.popleft()
+            work_wait_num += 1
+        count = 0
+        for i in jobs:
+            if i[0] <= current_time:
+                heapq.heappush(work_wait, (i[1], i[0]))
+                work_wait_num += 1
+                count += 1
+        for i in range(count):
+            jobs.popleft()
+    answer = work_time // total_work
+    return answer

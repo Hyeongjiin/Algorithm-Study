@@ -1,0 +1,25 @@
+import heapq
+def solution(people, limit):
+    answer = 0
+    people.sort()
+    boats = []
+    for i in range(len(people) - 1, -1, -1):
+        if people[i] > limit / 2:
+            heapq.heappush(boats, people.pop())
+        else:
+            break
+    people.sort(reverse = True)
+    for i in range(len(people)):
+        if len(boats) == 0:
+            heapq.heappush(boats, people[i])
+            continue
+        current_boat = heapq.heappop(boats)
+        total = current_boat + people[i]
+        if total <= limit:
+            answer += 1
+            continue
+        else:
+            heapq.heappush(boats, current_boat)
+            heapq.heappush(boats, people[i])
+    answer += len(boats)
+    return answer

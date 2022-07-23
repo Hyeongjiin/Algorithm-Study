@@ -1,0 +1,15 @@
+def solution(routes):
+    answer = 1
+    routes.sort(key = lambda x:(x[0], x[1]))
+    print(routes)
+    space = [routes[0][0], routes[0][1]]
+    for i in range(1, len(routes)):
+        if space[1] < routes[i][0]:
+            space = [routes[i][0], routes[i][1]]
+            answer += 1
+        else:
+            space = [routes[i][0], space[1]]
+            if routes[i][1] < space[1]:
+                space[1] = routes[i][1]
+        print(space, answer)
+    return answer

@@ -1,0 +1,14 @@
+def solution(numbers):
+    answer = ''
+    data = []
+    for number in numbers:
+        number = str(number)
+        length = len(number)
+        number = str(number) * 4
+        data.append((number[:4], length))
+    data.sort(reverse = True)
+    for i in data:
+        answer += i[0][:i[1]]
+        if answer == "0":
+            break
+    return answer

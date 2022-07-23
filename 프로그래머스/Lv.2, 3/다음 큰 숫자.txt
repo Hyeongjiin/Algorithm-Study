@@ -1,0 +1,21 @@
+def solution(n):
+    answer = 0
+    stand = count_2(n)
+    num = n + 1
+    while True:
+        compare = count_2(num)
+        if compare == stand:
+            answer = num
+            break
+        num += 1
+    return answer
+
+def count_2(num):
+    count = 0
+    while num > 1:
+        if num % 2 == 1:
+            count += 1
+        num //= 2
+        if num == 1:
+            count += 1
+    return count
